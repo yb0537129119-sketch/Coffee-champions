@@ -10,3 +10,14 @@ export async function onRequestPut({request,env}){
     await env.COFFEE_DB.batch(stmts);return json({ok:true});
   }catch{return json({error:"לא ניתן לשמור אחוזי התקדמות בתחרות."},500)}
 }
+
+export async function onRequestPost({request,env}){
+  try{
+    if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
+    if(!await requireAuth(request,env,"admin"))return json({error:"נדרשת הרשאת מנהל אזור."},401);
+    const {branch}=await request.json();
+    if(!BRANCHES.includes(branch))return json({error:"יש לבחור סניף תקין."},400);
+    await env.COFFEE_DB.prepare("INSERT INTO coffee_sales(branch,general_progress,vietnam_progress) VALUES(?,0,0) ON CONFLICT(branch) DO UPDATE SET general_progress=0,vietnam_progress=0,updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now')").bind(branch).run();
+    return json({ok:true,branch});
+  }catch{return json({error:"לא ניתן לאפס את נתוני התחרות של הסניף."},500)}
+}
