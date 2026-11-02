@@ -5,7 +5,17 @@
 @keyframes livePulse{0%{box-shadow:0 0 0 0 #ff405288}70%{box-shadow:0 0 0 8px #ff405200}100%{box-shadow:0 0 0 0 #ff405200}}
 @keyframes riseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
-header{overflow:hidden}header:after{content:"";position:absolute;left:-20%;right:-20%;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#e32636,#ffd166,#e32636,transparent);background-size:200% 100%;animation:shimmer 5s linear infinite}
+header{overflow:hidden;isolation:isolate}
+body:before{content:"";position:fixed;z-index:40;pointer-events:none;top:0;bottom:0;left:-45%;width:34%;background:linear-gradient(90deg,transparent,rgba(255,35,65,.04) 20%,rgba(255,65,90,.22) 48%,rgba(255,220,150,.38) 50%,rgba(255,65,90,.2) 52%,rgba(255,35,65,.04) 80%,transparent);filter:blur(10px);transform:skewX(-12deg);animation:championSweep 7s ease-in-out infinite}
+body:after{content:"";position:fixed;z-index:39;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(227,38,54,.13),transparent 55%),linear-gradient(115deg,transparent 0 46%,rgba(255,255,255,.018) 49%,transparent 52%);animation:ambientGlow 5s ease-in-out infinite alternate}
+@keyframes championSweep{0%{left:-45%;opacity:0}12%{opacity:1}50%{left:115%;opacity:.85}62%{opacity:0}100%{left:115%;opacity:0}}
+@keyframes ambientGlow{from{opacity:.35}to{opacity:1}}
+.brand,h1,.eyebrow{position:relative;z-index:1;text-shadow:0 0 18px #e3263655}
+.live-badge{box-shadow:0 0 18px #e3263633;animation:badgeGlow 2.4s ease-in-out infinite alternate}
+@keyframes badgeGlow{from{box-shadow:0 0 8px #e3263622}to{box-shadow:0 0 24px #e3263688}}
+.countdown{position:relative;overflow:hidden}
+.countdown:after{content:"";position:absolute;top:-50%;bottom:-50%;left:-70%;width:45%;background:linear-gradient(90deg,transparent,#ffffff14,transparent);transform:skewX(-20deg);animation:countShine 5s ease-in-out infinite;pointer-events:none}
+@keyframes countShine{0%,35%{left:-70%}75%,100%{left:140%}}header:after{content:"";position:absolute;left:-20%;right:-20%;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#e32636,#ffd166,#e32636,transparent);background-size:200% 100%;animation:shimmer 5s linear infinite}
 .stat,.feature,.card,.podium-item{animation:riseIn .55s both;transition:transform .25s,border-color .25s,box-shadow .25s}
 .card:hover,.podium-item:hover{transform:translateY(-3px);border-color:#a7434e;box-shadow:0 10px 26px #0007}
 .bar i{transition:width 1.1s cubic-bezier(.2,.8,.2,1);border-radius:10px;position:relative}
