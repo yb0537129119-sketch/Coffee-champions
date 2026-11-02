@@ -1,18 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-<defs>
- <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a6"/><stop offset=".35" stop-color="#e7ad37"/><stop offset=".7" stop-color="#9c5b12"/><stop offset="1" stop-color="#ffe28a"/></linearGradient>
- <radialGradient id="bg"><stop stop-color="#512016"/><stop offset="1" stop-color="#090606"/></radialGradient>
- <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<rect x="12" y="12" width="488" height="488" rx="92" fill="url(#bg)" stroke="url(#gold)" stroke-width="12"/>
-<circle cx="256" cy="218" r="157" fill="none" stroke="#a76a24" stroke-width="3" opacity=".8"/>
-<path d="M156 140h200l-17 190q-83 54-166 0z" fill="url(#gold)" stroke="#fff0b2" stroke-width="7" filter="url(#glow)"/>
-<path d="M156 163H95q-22 4-14 39 13 57 83 52M356 163h61q22 4 14 39-13 57-83 52" fill="none" stroke="url(#gold)" stroke-width="19" stroke-linecap="round"/>
-<path d="M216 119l-16-29 36 9 20-35 20 35 36-9-16 29" fill="url(#gold)" stroke="#fff0b2" stroke-width="5" stroke-linejoin="round"/>
-<path d="M256 177c-35 24-43 59-24 89 13 20 35 29 54 15 27-21 16-59-30-104z" fill="#2b1009" stroke="#6c370f" stroke-width="5"/>
-<path d="M256 186q-17 42-5 83" fill="none" stroke="url(#gold)" stroke-width="6" stroke-linecap="round"/>
-<path d="M132 356q124 44 248 0" fill="none" stroke="url(#gold)" stroke-width="10" stroke-linecap="round"/>
-<path d="M110 392h292" stroke="url(#gold)" stroke-width="5"/>
-<text x="256" y="433" text-anchor="middle" font-family="Arial,sans-serif" font-size="43" font-weight="900" fill="#fff0bc">תחרות קפה</text>
-<text x="256" y="472" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" letter-spacing="5" font-weight="bold" fill="#e9b64d">בראשית</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 180">
+<defs><linearGradient id="ink" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#dedede"/></linearGradient></defs>
+<text x="260" y="125" text-anchor="middle" direction="rtl" unicode-bidi="bidi-override" font-family="Arial, sans-serif" font-size="112" font-weight="900" letter-spacing="-4" fill="url(#ink)">בראשית</text>
 </svg>
