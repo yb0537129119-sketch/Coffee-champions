@@ -10,5 +10,5 @@ export async function onRequestPost({request,env}){
     const salt=randomToken(16),hash=await passwordHash(password,salt);
     await env.COFFEE_DB.prepare("INSERT INTO users(username,role,branch,password_hash,password_salt) VALUES('מנהל אזור','admin',NULL,?,?)").bind(hash,salt).run();
     return json({ok:true,message:"מנהל האזור הוגדר. הסר כעת את BOOTSTRAP_SECRET מהגדרות Cloudflare."});
-  }catch{return json({error:"האתחול נכשל."},500)}
+  }catch(error){return json({error:"האתחול נכשל: "+String(error?.message||error).slice(0,240)},500)}
 }
