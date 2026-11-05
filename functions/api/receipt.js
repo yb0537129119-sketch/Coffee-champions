@@ -6,8 +6,8 @@ export async function onRequestGet({request,env}){
   const url=new URL(request.url),id=url.searchParams.get("id"),branch=url.searchParams.get("branch"),employee=url.searchParams.get("employee");
   let row;
   if(id){
-   if(!/^\\d+$/.test(id))return json({error:"הקבלה המבוקשת אינה זמינה."},404);
-   row=await env.COFFEE_DB.prepare("SELECT receipt_data,receipt_type FROM subscription_receipts WHERE id=?").bind(Number(id)).first();
+   if(!BRANCHES.includes(branch)||!/^\\d+$/.test(id))return json({error:"הקבלה המבוקשת אינה זמינה."},404);
+   row=await env.COFFEE_DB.prepare("SELECT receipt_data,receipt_type FROM subscription_receipts WHERE id=? AND branch=?").bind(Number(id),branch).first();
   }else{
    if(!BRANCHES.includes(branch)||!EMPLOYEES.includes(employee))return json({error:"הקבלה המבוקשת אינה זמינה."},404);
    row=await env.COFFEE_DB.prepare("SELECT receipt_data,receipt_type FROM employee_subscriptions WHERE branch=? AND employee=?").bind(branch,employee).first();
