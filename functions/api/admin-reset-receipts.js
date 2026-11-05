@@ -1,9 +1,10 @@
-import {json,sameOrigin,passwordHash} from "./_auth.js";
-const SALT="51f81ed5f6e543bd300b5ca720e6d27f",HASH="4e22c5f3ea6bcb3fc1fd5bae6a985d9b8e67a2e1f188b668ca37c742842789b7",BRANCHES=["ביתר עילית A","ביתר עילית B"];
+import {json,sameOrigin,requireAuth} from "./_auth.js";
+const BRANCHES=["ביתר עילית A","ביתר עילית B"];
 export async function onRequestPost({request,env}){try{
  if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
- const body=await request.json(),branch=String(body.branch||""),code=String(body.code||"");
- if(!BRANCHES.includes(branch)||code.length>32||await passwordHash(code,SALT)!==HASH)return json({error:"הקוד שגוי."},403);
+ const admin=await requireAuth(request,env,"admin");if(!admin)return json({error:"נדרשת הרשאת מנהל אזור."},403);
+ const body=await request.json(),branch=String(body.branch||"");
+ if(!BRANCHES.includes(branch))return json({error:"יש לבחור סניף תקין."},400);
  await env.COFFEE_DB.batch([
   env.COFFEE_DB.prepare("DELETE FROM subscription_receipts WHERE branch=?").bind(branch),
   env.COFFEE_DB.prepare("UPDATE employee_subscriptions SET receipt_data=NULL,receipt_type=NULL,updated_at=strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE branch=?").bind(branch)
