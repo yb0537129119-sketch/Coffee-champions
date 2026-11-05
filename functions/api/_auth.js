@@ -26,6 +26,7 @@ export function sameOrigin(request){
   const origin=request.headers.get("Origin");
   return !!origin && origin===new URL(request.url).origin;
 }
+export function canAccessBranch(user,branch){return !!user && (user.role==="admin" || (user.role==="branch" && user.branch===branch));}
 export async function requireAuth(request,env,role){
   const token=cookieValue(request);
   if(!token) return null;
