@@ -1,6 +1,7 @@
-import {json,passwordHash,randomToken} from "./_auth.js";
+import {json,passwordHash,randomToken,sameOrigin} from "./_auth.js";
 export async function onRequestPost({request,env}){
   try{
+    if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
     if(!env.BOOTSTRAP_SECRET)return json({error:"חסר סוד אתחול ב-Cloudflare."},503);
     const {secret,password}=await request.json();
     if(typeof secret!=="string"||secret!==env.BOOTSTRAP_SECRET)return json({error:"סוד האתחול שגוי."},403);
