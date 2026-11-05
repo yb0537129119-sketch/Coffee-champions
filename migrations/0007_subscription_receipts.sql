@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS subscription_receipts (id INTEGER PRIMARY KEY AUTOINCREMENT, branch TEXT NOT NULL CHECK (branch IN ('ביתר עילית A','ביתר עילית B')), employee TEXT NOT NULL CHECK (employee IN ('יהודה בן גיגי','נהוראי מלכה','אוריאל דוד פנחסי','ישי אלמקייס')), receipt_data TEXT NOT NULL, receipt_type TEXT NOT NULL DEFAULT 'image/jpeg', created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')));
+CREATE INDEX IF NOT EXISTS idx_subscription_receipts_branch_employee ON subscription_receipts(branch,employee,created_at DESC);
