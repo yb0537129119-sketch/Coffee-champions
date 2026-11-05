@@ -21,12 +21,12 @@ button{border:0;border-radius:10px;padding:13px 16px;background:var(--red);color
 <div id="notice" class="notice" role="status"></div>
 <section class="panel">
  <div class="branch-title">דיווח מנויים</div>
- <div class="note">בחרו סניף ואת השם שלכם, עדכנו את מספר המנויים והוסיפו צילום קבלה.</div>
+ <div class="note">בחרו סניף, שם והזינו את הקוד האישי בן 6 הספרות שקיבלתם.</div>
  <label for="branch">הסניף שלי</label><select id="branch"><option value="ביתר עילית A">ביתר עילית A</option><option value="ביתר עילית B">ביתר עילית B</option></select>
  <label for="employee">השם שלי</label><select id="employee"><option value="">בחירת עובד</option><option>יהודה בן גיגי</option><option>נהוראי מלכה</option><option>אוריאל דוד פנחסי</option><option>ישי אלמקייס</option></select>
- <label for="count">מספר המנויים שלי (סה״כ מעודכן)</label><input id="count" type="number" min="0" max="100000" step="1" inputmode="numeric" placeholder="לדוגמה: 12">
+ <label for="pin">הקוד האישי שלי</label><input id="pin" type="password" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" placeholder="6 ספרות"><button id="login" type="button">כניסה</button><div id="editArea" class="hidden"><label for="count">מספר המנויים שלי (סה״כ מעודכן)</label><input id="count" type="number" min="0" max="100000" step="1" inputmode="numeric" placeholder="לדוגמה: 12">
  <label for="receipt">צילום קבלה (לא חובה בכל עדכון)</label><input id="receipt" type="file" accept="image/*" capture="environment">
- <button id="save">שמירת העדכון שלי</button>
+ <button id="save">שמירת העדכון שלי</button></div><button id="logout" class="hidden" type="button" style="background:#333">יציאה מהחשבון</button>
 </section>
 <section class="panel">
  <div class="summary"><div><div class="note">התקדמות הסניף</div><div class="branch-title" id="branchTitle">ביתר עילית A</div></div><div><div class="note">סה״כ מנויים</div><strong id="total">0</strong></div></div>
@@ -37,19 +37,21 @@ button{border:0;border-radius:10px;padding:13px 16px;background:var(--red);color
 <script>
 (()=>{'use strict';
 const BRANCHES=['ביתר עילית A','ביתר עילית B'],EMPLOYEES=['יהודה בן גיגי','נהוראי מלכה','אוריאל דוד פנחסי','ישי אלמקייס'];
-const $=id=>document.getElementById(id);let rows=[];
+const $=id=>document.getElementById(id);let rows=[],signedIn=false;
 function notice(s){$('notice').textContent=s;$('notice').style.display='block'}function clear(){ $('notice').style.display='none' }
 async function api(path,options={}){const r=await fetch('/api/'+path,{...options,credentials:'same-origin',headers:{'Content-Type':'application/json',...(options.headers||{})}});const d=await r.json().catch(()=>({error:'שגיאת שרת'}));if(!r.ok)throw Error(d.error||'שגיאת שרת');return d}
 async function load(){clear();const branch=$('branch').value;try{
- const d=await api('reports?branch='+encodeURIComponent(branch));rows=d.employees||[];$('branchTitle').textContent=branch;$('total').textContent=rows.reduce((n,r)=>n+Number(r.subscriptions||0),0).toLocaleString('he-IL');
- $('employees').innerHTML=rows.map((r,i)=>'<article class="employee-card"><div class="employee-name">'+r.employee+'</div><div class="employee-count">'+Number(r.subscriptions||0).toLocaleString('he-IL')+' מנויים</div>'+(r.has_receipt?'<button class="receipt-link" data-receipt="'+i+'">צפייה בקבלה</button>':'<div class="updated">טרם הועלתה קבלה</div>')+(r.updated_at?'<div class="updated">עודכן: '+new Date(r.updated_at).toLocaleString('he-IL')+'</div>':'')+'</article>').join('');
+ const d=await api('reports');rows=d.employees||[];$('employee').value=d.employee;$('employee').disabled=true;$('branch').disabled=true;$('branchTitle').textContent=branch;$('total').textContent=rows.reduce((n,r)=>n+Number(r.subscriptions||0),0).toLocaleString('he-IL');
+ $('employees').innerHTML=rows.filter(r=>r.employee===$('employee').value).map((r,i)=>'<article class="employee-card"><div class="employee-name">'+r.employee+'</div><div class="employee-count">'+Number(r.subscriptions||0).toLocaleString('he-IL')+' מנויים</div>'+(r.has_receipt?'<button class="receipt-link" data-receipt="'+i+'">צפייה בקבלה</button>':'<div class="updated">טרם הועלתה קבלה</div>')+(r.updated_at?'<div class="updated">עודכן: '+new Date(r.updated_at).toLocaleString('he-IL')+'</div>':'')+'</article>').join('');
  document.querySelectorAll('[data-receipt]').forEach(b=>b.onclick=()=>viewReceipt(Number(b.dataset.receipt)));
  }catch(e){notice(e.message)}}
 function compress(file){return new Promise((resolve,reject)=>{if(!file.type.startsWith('image/'))return reject(Error('יש לבחור תמונה.'));if(file.size>15*1024*1024)return reject(Error('התמונה גדולה מדי, עד 15MB.'));const url=URL.createObjectURL(file),img=new Image();img.onload=async()=>{try{let scale=Math.min(1,1280/Math.max(img.naturalWidth,img.naturalHeight)),blob;for(let i=0;i<7;i++){const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.naturalWidth*scale));c.height=Math.max(1,Math.round(img.naturalHeight*scale));const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);blob=await new Promise(res=>c.toBlob(res,'image/jpeg',[.78,.68,.58,.5,.44,.4,.36][i]));if(blob&&blob.size<=850*1024)break;scale*=.82}URL.revokeObjectURL(url);if(!blob||blob.size>850*1024)return reject(Error('לא ניתן לדחוס את התמונה. נסה צילום קטן יותר.'));resolve(blob)}catch(e){URL.revokeObjectURL(url);reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(Error('לא ניתן לפתוח את התמונה.'))};img.src=url})}
 function base64(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result).split(',')[1]||'');r.onerror=()=>reject(Error('לא ניתן לקרוא את התמונה'));r.readAsDataURL(blob)})}
+$('login').onclick=async()=>{clear();try{await api('employee-login',{method:'POST',body:JSON.stringify({branch:$('branch').value,employee:$('employee').value,pin:$('pin').value})});signedIn=true;$('pin').value='';$('editArea').classList.remove('hidden');$('login').classList.add('hidden');$('logout').classList.remove('hidden');await load()}catch(e){notice(e.message)}};
+$('logout').onclick=async()=>{try{await api('employee-session',{method:'POST',body:'{}'})}catch{}signedIn=false;$('editArea').classList.add('hidden');$('login').classList.remove('hidden');$('logout').classList.add('hidden');$('employee').disabled=false;$('branch').disabled=false;$('employee').value='';rows=[];load()};
 $('save').onclick=async()=>{clear();const branch=$('branch').value,employee=$('employee').value,count=Number($('count').value),file=$('receipt').files[0];if(!BRANCHES.includes(branch)||!EMPLOYEES.includes(employee))return notice('בחרו את הסניף ואת השם שלכם.');if(!Number.isInteger(count)||count<0||count>100000)return notice('יש להזין מספר מנויים שלם ותקין.');const b=$('save');b.disabled=true;b.textContent='שומר...';try{const receipt=file?await base64(await compress(file)):null;await api('report',{method:'POST',body:JSON.stringify({branch,employee,subscriptions:count,receipt})});$('receipt').value='';notice('העדכון נשמר בהצלחה, '+employee+'!');await load()}catch(e){notice(e.message)}finally{b.disabled=false;b.textContent='שמירת העדכון שלי'}};
-async function viewReceipt(i){const row=rows[i];try{const p=new URLSearchParams({branch:$('branch').value,employee:row.employee}),d=await api('receipt?'+p);$('modalTitle').textContent='קבלה – '+row.employee;$('receiptImage').src='data:'+(d.type||'image/jpeg')+';base64,'+d.data;$('modal').classList.remove('hidden')}catch(e){notice(e.message)}}
-$('branch').onchange=()=>{ $('employee').value='';$('count').value='';$('receipt').value='';load()};$('close').onclick=()=>{$('modal').classList.add('hidden');$('receiptImage').removeAttribute('src')};$('modal').onclick=e=>{if(e.target===$('modal'))$('close').click()};
-load();
+async function viewReceipt(i){const row=rows[i];try{const d=await api('receipt');$('modalTitle').textContent='קבלה – '+row.employee;$('receiptImage').src='data:'+(d.type||'image/jpeg')+';base64,'+d.data;$('modal').classList.remove('hidden')}catch(e){notice(e.message)}}
+$('branch').onchange=()=>{ $('employee').value='';$('count').value='';$('receipt').value='';};$('close').onclick=()=>{$('modal').classList.add('hidden');$('receiptImage').removeAttribute('src')};$('modal').onclick=e=>{if(e.target===$('modal'))$('close').click()};
+$('editArea').classList.add('hidden');
 })();
 </script></body></html>
