@@ -1,3 +1,5 @@
 import {json} from "./_auth.js";
-const BRANCHES=["ביתר עילית A","ביתר עילית B"];
-export async function onRequestGet({request,env}){try{const branch=new URL(request.url).searchParams.get("branch");if(!BRANCHES.includes(branch))return json({error:"יש לבחור סניף תקין."},400);const result=await env.COFFEE_DB.prepare("SELECT id,employee,created_at FROM subscription_receipts WHERE branch=? ORDER BY created_at DESC,id DESC LIMIT 200").bind(branch).all();return json({receipts:result.results||[]})}catch{return json({error:"לא ניתן לטעון את הקבלות."},500)}}
+export async function onRequestGet({env}){try{
+ const result=await env.COFFEE_DB.prepare("SELECT id,branch,employee,created_at FROM subscription_receipts ORDER BY created_at DESC,id DESC LIMIT 500").all();
+ return json({receipts:result.results||[]});
+}catch{return json({error:"לא ניתן לטעון את כל הקבלות."},500)}}
