@@ -5,7 +5,7 @@
 <link rel="manifest" href="/manifest.webmanifest"><link rel="apple-touch-icon" href="/assets/coffee-champions.svg"><link rel="icon" type="image/svg+xml" href="/assets/coffee-champions.svg">
 <title>מנויים | קליית בראשית</title>
 <style>
-:root{--red:#e32636;--line:#383838}*{box-sizing:border-box;min-width:0}html,body{margin:0;max-width:100%;overflow-x:hidden}body:not(.authenticated) header,body:not(.authenticated) main{display:none!important}.login-screen{min-height:100dvh;display:grid;place-items:center;padding:20px;background:radial-gradient(ellipse at top,#351018,#080808 65%)}.login-card{width:min(420px,100%);padding:24px;border:1px solid #71303a;border-radius:18px;background:#151515;box-shadow:0 20px 70px #0009}.login-card h1{font-size:28px}.login-error{color:#ff9aa2;min-height:22px;font-size:14px}.top-actions{display:flex;justify-content:center;gap:10px;align-items:center;margin-top:12px}.top-actions button{width:auto;margin:0;padding:9px 14px;font-size:13px}.hidden{display:none!important}
+:root{--red:#e32636;--line:#383838}*{box-sizing:border-box;min-width:0}html,body{margin:0;max-width:100%;overflow-x:hidden}.hidden{display:none!important}
 body{background:radial-gradient(ellipse at top,#281015,#090909 56%);color:#f5f5f5;font-family:Arial,sans-serif;min-height:100vh}
 header{text-align:center;padding:27px 14px 20px;background:#090909;border-bottom:1px solid #632630}.brand{font-size:25px;font-weight:900}.eyebrow{margin-top:8px;color:#ff6974;font-size:11px;letter-spacing:4px;font-weight:bold}h1{font-size:clamp(27px,6vw,40px);margin:10px 0 4px}h1 span{color:#f04452}.sub,.note{color:#aaa;font-size:14px;line-height:1.6}
 main{width:min(760px,100%);margin:auto;padding:18px 13px 50px}.panel,.employee-card{background:linear-gradient(145deg,#1b1b1b,#111);border:1px solid var(--line);border-radius:15px;padding:16px;margin:12px 0}
@@ -15,14 +15,14 @@ button{border:0;border-radius:10px;padding:13px 16px;background:var(--red);color
 .employees{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.employee-card{margin:0;padding:13px}.employee-name{font-weight:900;font-size:17px}.employee-count{font-size:26px;color:#ff5967;font-weight:900;margin-top:9px}.updated{font-size:11px;color:#999;margin-top:7px}.receipt-link{background:none;border:0;color:#ff9aa2;text-decoration:underline;padding:5px 0;width:auto;margin:8px 0 0;font-size:13px}
 .rank{display:inline-block;border-radius:20px;padding:5px 10px;font-size:12px;font-weight:900;margin-top:8px;background:#332329;color:#ffd5d9}.rank.first{background:#5b4315;color:#ffe39a}.rank.second{background:#343434;color:#eee}.spotlight{border-color:#9d303d;background:linear-gradient(135deg,#32151b,#151111)}.countdown{font-size:clamp(24px,7vw,34px);font-weight:900;color:#ff6874;letter-spacing:1px;margin-top:8px}.mine-value{font-size:28px;font-weight:900;color:#ff5967;margin-top:7px}.status-line{font-size:15px;line-height:1.7}.notice{display:none;padding:12px;margin:12px 0;border:1px solid #80323c;border-radius:10px;background:#281418;color:#ffe1e4;line-height:1.5}.modal{position:fixed;z-index:10;inset:0;background:#000d;display:flex;align-items:center;justify-content:center;padding:15px}.dialog{width:min(500px,100%);padding:16px;border:1px solid #a33b47;border-radius:16px;background:#171717}.dialog img{display:block;max-width:100%;max-height:70dvh;object-fit:contain;margin:12px auto}.hidden{display:none!important}
 @media(max-width:560px){.employees{grid-template-columns:1fr}header{padding-top:22px}main{padding-left:10px;padding-right:10px}}
-.archive-list{display:grid;gap:9px}.archive-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;background:#101010;border:1px solid #383838;border-radius:10px}.archive-meta{font-size:13px;line-height:1.6;color:#ddd}.archive-item button{width:auto;white-space:nowrap;margin:0;padding:9px 12px;font-size:13px}.danger-button{background:#5b1820;border:1px solid #a33b47}.empty{color:#999;font-size:13px;padding:10px 0}</style></head><body><section id="loginScreen" class="login-screen"><div class="login-card"><div class="brand">קליית בראשית</div><div class="eyebrow">COFFEE CHAMPIONS</div><h1>כניסה למערכת</h1><div class="note">התחבר עם חשבון מנהל האזור או מנהל הסניף שלך.</div><label for="loginUser">שם משתמש</label><input id="loginUser" autocomplete="username" placeholder="שם משתמש"><label for="loginPass">סיסמה</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="סיסמה"><button id="loginBtn">כניסה מאובטחת</button><div id="loginError" class="login-error" role="alert"></div></div></section>
-<header><div class="brand">קליית בראשית</div><div class="eyebrow">COFFEE CHAMPIONS</div><h1>ניהול <span>מנויים</span></h1><div class="sub">עדכון אישי לעובדי ביתר עילית</div><div class="top-actions"><span id="signedInAs" class="note"></span><button id="logoutBtn" type="button">יציאה מהמערכת</button></div></header>
+.archive-list{display:grid;gap:9px}.archive-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;background:#101010;border:1px solid #383838;border-radius:10px}.archive-meta{font-size:13px;line-height:1.6;color:#ddd}.archive-item button{width:auto;white-space:nowrap;margin:0;padding:9px 12px;font-size:13px}.danger-button{background:#5b1820;border:1px solid #a33b47}.empty{color:#999;font-size:13px;padding:10px 0}nav.tabs{display:flex;position:sticky;top:0;z-index:5;gap:7px;padding:10px max(10px,calc((100% - 760px)/2));background:#090909;border-bottom:1px solid #632630}nav.tabs .tab{flex:1;margin:0;padding:11px 6px;background:#1a1a1a;border:1px solid #444;font-size:14px}nav.tabs .tab.active{background:#e32636;border-color:#e32636}@media(max-width:420px){nav.tabs .tab{font-size:12px;padding:10px 4px}}\n</style></head><body><header><div class="brand">קליית בראשית</div><div class="eyebrow">COFFEE CHAMPIONS</div><h1>ניהול <span>מנויים</span></h1><div class="sub">עדכון אישי לעובדי ביתר עילית</div></header>
+<nav class="tabs" aria-label="ניווט ראשי"><button class="tab active" data-tab="home">מסך הבית</button><button class="tab" data-tab="report">דיווח מנוי</button><button class="tab" data-tab="archive">קבלות</button></nav>
 <main>
 <div id="notice" class="notice" role="status"></div>
 <section class="panel spotlight" id="countdownPanel"><div class="branch-title">⏳ הזמן אוזל – תחרות הקפה</div><div class="note">הספירה לאחור עד סיום התחרות: 31.12.2026</div><div class="countdown" id="countdown" aria-live="off">טוען...</div><div class="note" id="countdownStatus">כל מכירה מקרבת אתכם לניצחון! ☕🏆</div></section>
 <section class="panel spotlight" id="competitionUpdate"><div class="branch-title">☕🏆 סיכום תחרות הקפה – לבינתיים!</div><div class="note" style="margin:8px 0 12px">ניכרת עבודת מכירה והשקעה יפה כל הכבוד לכולם! 👏🔥</div><div class="status-line">🥇 <strong>מקום 1:</strong> ים גאולה – אלופים! 🏆</div><div class="status-line">🥈 <strong>מקום 2:</strong> צפת וביתר עילית – תותחים! 💪</div><div class="status-line">🥉 <strong>מקום 3:</strong> תל אביב ופתח תקווה – שאפו גדול! 👏</div></section>
 
-<section class="panel">
+<section class="panel tab-panel hidden" id="reportPanel">
  <div class="branch-title">דיווח מנויים</div>
  <div class="note">בחרו סניף ואת השם שלכם, צרפו קבלה של מנוי חדש ולחצו שמירה. כל קבלה מוסיפה מנוי אחד אוטומטית לספירה המצטברת.</div>
  <label for="branch">הסניף שלי</label><select id="branch"><option value="ביתר עילית A">ביתר עילית A</option><option value="ביתר עילית B">ביתר עילית B</option></select>
@@ -30,22 +30,21 @@ button{border:0;border-radius:10px;padding:13px 16px;background:var(--red);color
  <label for="receipt">צילום קבלה – חובה לכל מנוי חדש</label><input id="receipt" type="file" accept="image/*" required>
  <button id="save">שמירת הקבלה והוספת מנוי</button>
 </section>
-<section class="panel">
+<section class="panel tab-panel" id="homePanel">
  <div class="summary"><div><div class="note">התקדמות הסניף</div><div class="branch-title" id="branchTitle">ביתר עילית A</div></div><div><div class="note">סה״כ מנויים</div><strong id="total">0</strong></div></div>
  <div class="divider"></div><div class="employees" id="employees"></div>
 </section>
-<section class="panel"><div class="summary"><div class="branch-title">🧾 ארכיון קבלות</div><span class="note">כל הקבלות מכל העובדים ומשני הסניפים</span></div><div id="archive" class="archive-list"><div class="empty">טוען קבלות...</div></div></section>
-<section class="panel" id="resetPanel"><div class="branch-title">איפוס נתוני מנויים</div><div class="note">בחר את הסניף שברצונך לאפס. הפעולה זמינה למנהל האזור בלבד.</div><label for="resetBranch">בחירת סניף לאיפוס</label><select id="resetBranch"><option value="ביתר עילית A">ביתר עילית A</option><option value="ביתר עילית B">ביתר עילית B</option></select><button id="reset" class="danger-button">איפוס מנויים בסניף הנבחר</button></section>
-<section class="panel" id="resetReceiptsPanel"><div class="branch-title">איפוס ארכיון קבלות</div><div class="note">בחר את הסניף שברצונך לנקות. הפעולה זמינה למנהל האזור בלבד.</div><label for="resetReceiptsBranch">בחירת סניף למחיקת קבלות</label><select id="resetReceiptsBranch"><option value="ביתר עילית A">ביתר עילית A</option><option value="ביתר עילית B">ביתר עילית B</option></select><button id="resetReceipts" class="danger-button">מחיקת קבלות הסניף הנבחר</button></section>
+<section class="panel tab-panel hidden" id="archivePanel"><div class="summary"><div class="branch-title">🧾 ארכיון קבלות</div><span class="note">קבלות הסניף הנבחר</span></div><div id="archive" class="archive-list"><div class="empty">טוען קבלות...</div></div></section>
+
 </main>
 <section id="modal" class="modal hidden"><div class="dialog"><div class="summary"><strong id="modalTitle">קבלה</strong><button id="close" style="width:auto;margin:0;background:#333">סגירה</button></div><img id="receiptImage" alt="צילום קבלה"></div></section>
 <script>
 (()=>{'use strict';
 const BRANCHES=['ביתר עילית A','ביתר עילית B'],EMPLOYEES=['יהודה בן גיגי','נהוראי מלכה','אוריאל דוד פנחסי','ישי אלמקייס'];
-const $=id=>document.getElementById(id);let rows=[],currentUser=null;
+const $=id=>document.getElementById(id);let rows=[];
 function notice(s){$('notice').textContent=s;$('notice').style.display='block'}function clear(){ $('notice').style.display='none' }
 async function api(path,options={}){const r=await fetch('/api/'+path,{...options,credentials:'same-origin',cache:'no-store',headers:{'Content-Type':'application/json',...(options.headers||{})}});const d=await r.json().catch(()=>({error:'שגיאת שרת'}));if(!r.ok)throw Error(d.error||'שגיאת שרת');return d}
-async function load(silent=false){if(!currentUser)return;if(!silent)clear();const branch=$('branch').value;try{
+async function load(silent=false){if(!silent)clear();const branch=$('branch').value;try{
  const d=await api('reports?branch='+encodeURIComponent(branch));rows=d.employees||[];$('branchTitle').textContent=branch;$('total').textContent=rows.reduce((n,r)=>n+Number(r.subscriptions||0),0).toLocaleString('he-IL');
  const ranked=[...rows].sort((a,b)=>Number(b.subscriptions||0)-Number(a.subscriptions||0));
  $('employees').innerHTML=ranked.map((r)=>{const original=rows.indexOf(r),rank=original>=0&&ranked.indexOf(r)===0&&Number(r.subscriptions||0)>0?'<div class="rank first">🥇 מקום ראשון</div>':ranked.indexOf(r)===1&&Number(r.subscriptions||0)>0?'<div class="rank second">🥈 מקום שני</div>':'';return '<article class="employee-card"><div class="employee-name">'+r.employee+'</div>'+rank+'<div class="employee-count">'+Number(r.subscriptions||0).toLocaleString('he-IL')+' מנויים</div>'+(r.has_receipt?'<button class="receipt-link" data-receipt="'+original+'">צפייה בקבלה האחרונה</button>':'<div class="updated">טרם הועלתה קבלה</div>')+(r.updated_at?'<div class="updated">עודכן: '+new Date(r.updated_at).toLocaleString('he-IL')+'</div>':'')+'</article>'}).join('');
@@ -58,35 +57,21 @@ function compress(file){return new Promise((resolve,reject)=>{if(!file.type.star
 function base64(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(String(r.result).split(',')[1]||'');r.onerror=()=>reject(Error('לא ניתן לקרוא את התמונה'));r.readAsDataURL(blob)})}
 $('save').onclick=async()=>{clear();const branch=$('branch').value,employee=$('employee').value,file=$('receipt').files[0];if(!BRANCHES.includes(branch)||!EMPLOYEES.includes(employee))return notice('בחרו את הסניף ואת השם שלכם.');if(!file)return notice('כדי להוסיף מנוי יש לצרף צילום קבלה.');const b=$('save');b.disabled=true;b.textContent='שומר ומוסיף מנוי...';try{const receipt=await base64(await compress(file));const result=await api('report',{method:'POST',body:JSON.stringify({branch,employee,receipt})});$('receipt').value='';notice('הקבלה נשמרה! נוספה יחידת מנוי אחת. סך הכול לעובד: '+result.subscriptions);await load()}catch(e){notice(e.message)}finally{b.disabled=false;b.textContent='שמירת הקבלה והוספת מנוי'}};
 async function viewReceipt(i){const row=rows[i];try{const p=new URLSearchParams({branch:$('branch').value,employee:row.employee}),d=await api('receipt?'+p);$('modalTitle').textContent='קבלה – '+row.employee;$('receiptImage').src='data:'+(d.type||'image/jpeg')+';base64,'+d.data;$('modal').classList.remove('hidden')}catch(e){notice(e.message)}}
-$('reset').onclick=async()=>{const branch=$('resetBranch').value;if(currentUser?.role!=='admin')return notice('רק מנהל אזור יכול לבצע איפוס.');if(!confirm('לאפס את מספרי המנויים של '+branch+' בלבד? הקבלות בארכיון יישארו שמורות.'))return;const b=$('reset');b.disabled=true;b.textContent='מאפס...';try{await api('admin-reset',{method:'POST',body:JSON.stringify({branch})});notice('נתוני המנויים של '+branch+' אופסו. הקבלות נשמרו בארכיון.');await load()}catch(e){notice(e.message)}finally{b.disabled=false;b.textContent='איפוס מנויים בסניף הנבחר'}};
-$('resetReceipts').onclick=async()=>{const branch=$('resetReceiptsBranch').value;if(currentUser?.role!=='admin')return notice('רק מנהל אזור יכול למחוק קבלות.');if(!confirm('למחוק לצמיתות את כל הקבלות של '+branch+' בלבד? מספרי המנויים לא ישתנו.'))return;if(!confirm('אישור אחרון: מחיקת הקבלות של '+branch+' אינה ניתנת לשחזור. להמשיך?'))return;const b=$('resetReceipts');b.disabled=true;b.textContent='מוחק קבלות...';try{await api('admin-reset-receipts',{method:'POST',body:JSON.stringify({branch})});notice('הקבלות של '+branch+' נמחקו מהארכיון ומהכרטיסים. מספרי המנויים נשארו ללא שינוי.');await load()}catch(e){notice(e.message)}finally{b.disabled=false;b.textContent='מחיקת קבלות הסניף הנבחר'}};
+$('reset').onclick=async()=>{const branch=$('resetBranch').value;return notice('פעולת איפוס דורשת הרשאת מנהל.');if(!confirm('לאפס את מספרי המנויים של '+branch+' בלבד? הקבלות בארכיון יישארו שמורות.'))return;const b=$('reset');b.disabled=true;b.textContent='מאפס...';try{await api('admin-reset',{method:'POST',body:JSON.stringify({branch})});notice('נתוני המנויים של '+branch+' אופסו. הקבלות נשמרו בארכיון.');await load()}catch(e){notice(e.message)}finally{b.disabled=false;b.textContent='איפוס מנויים בסניף הנבחר'}};
+$('resetReceipts').onclick=async()=>{const branch=$('resetReceiptsBranch').value;return notice('מחיקת קבלות דורשת הרשאת מנהל.');if(!confirm('למחוק לצמיתות את כל הקבלות של '+branch+' בלבד? מספרי המנויים לא ישתנו.'))return;if(!confirm('אישור אחרון: מחיקת הקבלות של '+branch+' אינה ניתנת לשחזור. להמשיך?'))return;const b=$('resetReceipts');b.disabled=true;b.textContent='מוחק קבלות...';try{await api('admin-reset-receipts',{method:'POST',body:JSON.stringify({branch})});notice('הקבלות של '+branch+' נמחקו מהארכיון ומהכרטיסים. מספרי המנויים נשארו ללא שינוי.');await load()}catch(e){notice(e.message)}finally{b.disabled=false;b.textContent='מחיקת קבלות הסניף הנבחר'}};
 $('branch').onchange=()=>{ $('employee').value='';$('receipt').value='';load()};$('employee').onchange=load;$('close').onclick=()=>{$('modal').classList.add('hidden');$('receiptImage').removeAttribute('src')};$('modal').onclick=e=>{if(e.target===$('modal'))$('close').click()};
 function updateCountdown(){const target=new Date(2027,0,1,0,0,0).getTime(),now=Date.now(),left=target-now;if(left<=0){$('countdown').textContent='00 ימים · 00:00:00';$('countdownStatus').textContent='התחרות הסתיימה! תודה לכל המשתתפים 🏆';return}const days=Math.floor(left/86400000),hours=Math.floor(left%86400000/3600000),minutes=Math.floor(left%3600000/60000),seconds=Math.floor(left%60000/1000);$('countdown').textContent=String(days).padStart(2,'0')+' ימים · '+[hours,minutes,seconds].map(n=>String(n).padStart(2,'0')).join(':')}
 updateCountdown();setInterval(updateCountdown,1000);
-async function initAuth(){
- try{
-  const d=await api('me');currentUser=d.user;
-  if(!currentUser)throw Error('not signed in');
-  document.body.classList.add('authenticated');
-  $('loginScreen').classList.add('hidden');
-  $('signedInAs').textContent=currentUser.username+(currentUser.role==='admin'?' · מנהל אזור':' · מנהל סניף');
-  if(currentUser.role==='branch'){
-   $('branch').value=currentUser.branch;$('branch').disabled=true;
-   $('resetPanel').classList.add('hidden');$('resetReceiptsPanel').classList.add('hidden');
-  }else{
-   $('branch').disabled=false;
-  }
-  $('resetBranch').value=currentUser.role==='branch'?currentUser.branch:$('branch').value;
-  $('resetReceiptsBranch').value=currentUser.role==='branch'?currentUser.branch:$('branch').value;
-  await load();
- }catch{
-  currentUser=null;document.body.classList.remove('authenticated');$('loginScreen').classList.remove('hidden');
- }
-}
-$('loginBtn').onclick=async()=>{const b=$('loginBtn');$('loginError').textContent='';b.disabled=true;b.textContent='מתחבר...';try{await api('login',{method:'POST',body:JSON.stringify({username:$('loginUser').value,password:$('loginPass').value})});$('loginPass').value='';await initAuth()}catch(e){$('loginError').textContent=e.message}finally{b.disabled=false;b.textContent='כניסה מאובטחת'}};
-$('loginPass').addEventListener('keydown',e=>{if(e.key==='Enter')$('loginBtn').click()});
-$('logoutBtn').onclick=async()=>{try{await api('logout',{method:'POST'})}finally{location.reload()}};
-initAuth();
+async function init(){await load()}
+document.querySelectorAll('[data-tab]').forEach(tab=>tab.addEventListener('click',()=>{
+ const target=tab.dataset.tab;
+ document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));
+ $('homePanel').classList.toggle('hidden',target!=='home');
+ $('reportPanel').classList.toggle('hidden',target!=='report');
+ $('archivePanel').classList.toggle('hidden',target!=='archive');
+ if(target==='archive')loadArchive();
+}));
+init();
 let refreshing=false;setInterval(async()=>{if(document.hidden||!$('modal').classList.contains('hidden')||refreshing)return;refreshing=true;try{await load(true)}finally{refreshing=false}},20000);
 })();
 </script></body></html>
