@@ -1,0 +1,2 @@
+import {digest} from "./_auth.js";
+export async function employeeAuth(request,env){const raw=request.headers.get("Cookie")||"",p=raw.split(";").map(x=>x.trim()).find(x=>x.startsWith("__Host-cc_employee="));if(!p)return null;const token=decodeURIComponent(p.slice("__Host-cc_employee=".length));return await env.COFFEE_DB.prepare("SELECT branch,employee FROM employee_sessions WHERE token_hash=? AND expires_at>datetime('now')").bind(await digest(token)).first()}
