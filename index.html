@@ -61,5 +61,6 @@ $('reset').onclick=async()=>{const branch=$('resetBranch').value,code=$('resetCo
 $('resetReceipts').onclick=async()=>{const branch=$('resetReceiptsBranch').value,code=$('resetReceiptsCode').value;if(!code)return notice('יש להזין קוד מנהל.');if(!confirm('למחוק לצמיתות את כל הקבלות של '+branch+' בלבד? מספרי המנויים לא ישתנו.'))return;if(!confirm('אישור אחרון: מחיקת הקבלות של '+branch+' אינה ניתנת לשחזור. להמשיך?'))return;const b=$('resetReceipts');b.disabled=true;b.textContent='מוחק קבלות...';try{await api('admin-reset-receipts',{method:'POST',body:JSON.stringify({branch,code})});$('resetReceiptsCode').value='';notice('הקבלות של '+branch+' נמחקו מהארכיון ומהכרטיסים. מספרי המנויים נשארו ללא שינוי.');await load()}catch(e){notice(e.message)}finally{b.disabled=false;b.textContent='מחיקת קבלות הסניף הנבחר'}};
 $('branch').onchange=()=>{ $('employee').value='';$('receipt').value='';load()};$('employee').onchange=load;$('close').onclick=()=>{$('modal').classList.add('hidden');$('receiptImage').removeAttribute('src')};$('modal').onclick=e=>{if(e.target===$('modal'))$('close').click()};
 load();
+setInterval(()=>{if(!document.hidden)load()},20000);
 })();
 </script></body></html>
