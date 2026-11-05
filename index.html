@@ -1,73 +1,218 @@
-<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090606"><meta name="application-name" content="קליית בראשית"><meta name="apple-mobile-web-app-title" content="קליית בראשית"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="/manifest.webmanifest"><link rel="apple-touch-icon" href="/assets/coffee-champions.svg"><link rel="icon" type="image/svg+xml" href="/assets/coffee-champions.svg"><title>COFFEE CHAMPIONS</title><style>
-:root{--red:#e32636;--bg:#090909;--panel:#171717;--line:#383838}*{box-sizing:border-box;min-width:0}html,body{margin:0;width:100%;max-width:100%;overflow-x:hidden}body{background:radial-gradient(ellipse at top,#281015,#090909 55%);color:#f5f5f5;font-family:Arial,sans-serif}header{text-align:center;padding:26px 14px 20px;background:#090909;border-bottom:1px solid #54232a;position:relative}.brand{font-size:25px;font-weight:900}.eyebrow{color:#ff6974;letter-spacing:4px;font-size:11px;font-weight:bold;margin-top:9px}h1{font-size:clamp(28px,6vw,46px);margin:10px 0 4px}h1 span{color:#f04452}.sub,.muted,small{color:#aaa}main{max-width:1100px;margin:auto;padding:18px 14px 50px}.toolbar,.head,.actions{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.pill,.stat,.card,.panel,.feature{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}button{background:var(--red);color:#fff;border:0;border-radius:9px;padding:11px 15px;font-weight:bold;cursor:pointer}button.secondary{background:#292929;border:1px solid #444}button:disabled{opacity:.5}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}.stat strong{display:block;font-size:26px;margin-top:5px}.feature-grid,.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:16px 0}.feature{background:linear-gradient(145deg,#1d1d1d,#111);border-color:#4b252b}.feature h3{margin:0 0 10px}.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.podium-item{text-align:center;background:#101010;border:1px solid #444;border-radius:12px;padding:10px 4px}.podium-item strong{display:block;color:#ff5967;font-size:21px;margin:7px}.rank-card{position:relative;border-color:#454545}.rank-card.leader{border:1px solid #d5a83d;box-shadow:0 0 22px #d5a83d30;background:linear-gradient(145deg,#292113,#111)}.rank-number{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:30px;padding:0 8px;border-radius:9px;background:#292929;border:1px solid #555;color:#eee;font-weight:900;margin-left:8px}.leader .rank-number{background:#5a4215;border-color:#d5a83d;color:#ffe29a}.leader-tag{float:left;color:#ffe29a;font-size:12px;font-weight:900}.bar{height:14px;background:#333;border-radius:10px;margin:10px 0;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#941321,#ff4a59)}.bar.over i{background:linear-gradient(90deg,#b77b16,#ffd166)}.progress-meta{display:flex;justify-content:space-between;color:#aaa;font-size:12px}.percent{font-size:28px;font-weight:900;color:#ff5866}.branch-chart{width:100%;height:76px;display:block;margin:8px 0}.login,.editor{position:fixed;z-index:50;top:50%;right:50%;transform:translate(50%,-50%);width:min(440px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;background:#171717;border:1px solid #a33b47;border-radius:16px;padding:17px;box-shadow:0 22px 70px #000e}.editor{z-index:60;width:min(560px,calc(100vw - 24px))}.hidden{display:none!important}label{display:block;color:#bbb;font-size:13px;margin:10px 0 5px}input,select{width:100%;padding:12px;background:#090909;color:#fff;border:1px solid #444;border-radius:8px;font-size:16px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.notice{display:none;background:#281418;border:1px solid #692630;color:#ffdce0;border-radius:10px;padding:12px;margin:12px 0}.activity{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #333;font-size:13px}.chart-label{display:flex;justify-content:space-between;color:#888;font-size:11px}
-.live-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border:1px solid #7a2933;border-radius:30px;background:#241014;color:#ff9aa2;font-size:12px;font-weight:800}
-.live-dot{width:8px;height:8px;border-radius:50%;background:#ff4052;box-shadow:0 0 0 0 #ff405288;animation:livePulse 1.7s infinite}
-@keyframes livePulse{0%{box-shadow:0 0 0 0 #ff405288}70%{box-shadow:0 0 0 8px #ff405200}100%{box-shadow:0 0 0 0 #ff405200}}
-@keyframes riseIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes shimmer{0%{background-position:100% 0}100%{background-position:-100% 0}}
-header{overflow:hidden;isolation:isolate}
-body:before{content:"";position:fixed;z-index:40;pointer-events:none;top:0;bottom:0;left:-45%;width:34%;background:linear-gradient(90deg,transparent,rgba(255,35,65,.04) 20%,rgba(255,65,90,.22) 48%,rgba(255,220,150,.38) 50%,rgba(255,65,90,.2) 52%,rgba(255,35,65,.04) 80%,transparent);filter:blur(10px);transform:skewX(-12deg);animation:championSweep 7s ease-in-out infinite}
-body:after{content:"";position:fixed;z-index:39;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(227,38,54,.13),transparent 55%),linear-gradient(115deg,transparent 0 46%,rgba(255,255,255,.018) 49%,transparent 52%);animation:ambientGlow 5s ease-in-out infinite alternate}
-@keyframes championSweep{0%{left:-45%;opacity:0}12%{opacity:1}50%{left:115%;opacity:.85}62%{opacity:0}100%{left:115%;opacity:0}}
-@keyframes ambientGlow{from{opacity:.35}to{opacity:1}}
-.brand,h1,.eyebrow{position:relative;z-index:1;text-shadow:0 0 18px #e3263655}
-.live-badge{box-shadow:0 0 18px #e3263633;animation:badgeGlow 2.4s ease-in-out infinite alternate}
-@keyframes badgeGlow{from{box-shadow:0 0 8px #e3263622}to{box-shadow:0 0 24px #e3263688}}
-.countdown{position:relative;overflow:hidden}
-.countdown:after{content:"";position:absolute;top:-50%;bottom:-50%;left:-70%;width:45%;background:linear-gradient(90deg,transparent,#ffffff14,transparent);transform:skewX(-20deg);animation:countShine 5s ease-in-out infinite;pointer-events:none}
-@keyframes countShine{0%,35%{left:-70%}75%,100%{left:140%}}header:after{content:"";position:absolute;left:-20%;right:-20%;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#e32636,#ffd166,#e32636,transparent);background-size:200% 100%;animation:shimmer 5s linear infinite}
-.stat,.feature,.card,.podium-item{animation:riseIn .55s both;transition:transform .25s,border-color .25s,box-shadow .25s}
-.card:hover,.podium-item:hover{transform:translateY(-3px);border-color:#a7434e;box-shadow:0 10px 26px #0007}
-.bar i{transition:width 1.1s cubic-bezier(.2,.8,.2,1);border-radius:10px;position:relative}
-.bar i:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 20%,#ffffff55 50%,transparent 80%);background-size:200% 100%;animation:shimmer 2.8s linear infinite}
-.live-note{color:#999;font-size:12px;margin:10px 2px}
-.countdown{max-width:660px;margin:18px auto 0;padding:14px 16px;border:1px solid #71303a;border-radius:16px;background:linear-gradient(135deg,#281015,#111);box-shadow:0 10px 30px #0008}
-.countdown-title{font-size:12px;color:#ff9aa2;font-weight:800;letter-spacing:1px}
-.countdown-clock{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.count-unit{background:#090909;border:1px solid #47252a;border-radius:10px;padding:9px 4px;text-align:center}
-.count-unit strong{display:block;font-size:clamp(22px,5vw,34px);font-variant-numeric:tabular-nums;color:#fff}
-.count-unit span{font-size:11px;color:#aaa}
-.countdown-ended{color:#ffd166;font-weight:900;margin-top:9px}
-@media(max-width:400px){.countdown{padding:11px 8px}.countdown-clock{gap:5px}.count-unit{padding:8px 2px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}footer{text-align:center;color:#777;padding:24px;font-size:12px}@media(max-width:600px){header{padding-top:56px}.stats{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}.grid{grid-template-columns:1fr}main{padding-left:10px;padding-right:10px}}
-</style></head><body>
-<header><div class="brand">קליית בראשית</div><div class="eyebrow">THE BRANCH COMPETITION</div><h1>תחרות <span>קפה</span></h1><div class="sub" style="font-weight:800;letter-spacing:2px">COFFEE CHAMPIONS</div><div class="sub">תחרות הסניפים · נובמבר–דצמבר 2026</div><div style="margin-top:12px"><span class="live-badge"><i class="live-dot"></i> תחרות חיה · LIVE</span></div><div class="countdown"><div class="countdown-title">⏳ הזמן שנותר לתחרות COFFEE CHAMPIONS</div><div id="countdownClock" class="countdown-clock"><div class="count-unit"><strong>--</strong><span>ימים</span></div><div class="count-unit"><strong>--</strong><span>שעות</span></div><div class="count-unit"><strong>--</strong><span>דקות</span></div><div class="count-unit"><strong>--</strong><span>שניות</span></div></div></div><div style="margin-top:14px"><button id="showLogin">כניסת מנהל</button></div></header>
-<main><div class="toolbar"><div class="pill">☕ COFFEE CHAMPIONS</div><button class="secondary" id="refresh">רענון נתונים</button></div><div id="notice" class="notice"></div><div class="actions"><button id="tabCoffee">🏆 תחרות קפה</button><button class="secondary" id="tabSubs">📋 מנויים</button></div><section id="coffeePanel"><div class="feature" style="border-color:#d5a83d;background:linear-gradient(145deg,#292113,#111);text-align:center">
-<h2 style="color:#ffd166">☕🏆 סיכום תחרות הקפה – בינתיים! 🏆</h2>
-<p style="line-height:1.8">ניכרת עבודת מכירה והשקעה יפה בכל הסניפים, כל הכבוד לכולם! 👏🔥</p>
-<div class="podium" style="margin:20px 0">
-<div class="podium-item" style="border-color:#d5a83d"><div style="font-size:30px">🥇</div><strong>מקום ראשון</strong><h3>ים גאולה</h3><span>אלופים! 🏆</span></div>
-<div class="podium-item"><div style="font-size:30px">🥈</div><strong>מקום שני</strong><h3>צפת וביתר עילית</h3><span>תותחים! 💪</span></div>
-<div class="podium-item"><div style="font-size:30px">🥉</div><strong>מקום שלישי</strong><h3>תל אביב ופתח תקווה</h3><span>שאפו גדול! 👏</span></div>
-</div>
-<h3 style="color:#ff9aa2">🚀 ומה הלאה? אנחנו רק בתחילת הדרך!</h3>
-<p style="line-height:1.9">צריך להמשיך להגביר קצב, לחדד את המכירה ולדחוף בכל הכוח את חגיגת הקפה, <b style="color:#ffd166">בדגש על מנויים!!</b> ☕🔥<br>כל מכירה חשובה, כל לקוח הוא הזדמנות, וכל סניף יכול להפתיע ולכבוש את הפסגה!</p>
-<h3 style="color:#ffd166">יאללה, ממשיכים בכל הכוח – השיא עוד לפנינו! 💥💪</h3>
-</div></section><section id="subsPanel" class="hidden"><div class="stats"><div class="stat"><small>סה״כ מנויים</small><strong id="totalSubs">0</strong></div><div class="stat"><small>דיווחים</small><strong id="reportCount">0</strong></div></div><div class="feature"><h3>📊 דוחות והשוואות חכמות</h3><div class="row"><div><label for="reportFrom">מתאריך</label><input id="reportFrom" type="date"></div><div><label for="reportTo">עד תאריך</label><input id="reportTo" type="date"></div></div><div id="reportBranchWrap"><label for="reportBranch">סינון לפי סניף</label><select id="reportBranch"><option value="">כל הסניפים</option></select></div><div class="actions" style="margin-top:12px"><button class="secondary" id="clearReportFilters">ניקוי סינון</button><button id="exportReports">הפקת דוח PDF</button></div><div class="stats"><div class="stat"><small>מנויים בתקופה</small><strong id="periodSubs">0</strong></div><div class="stat"><small>מספר דיווחים</small><strong id="periodReports">0</strong></div><div class="stat"><small>ממוצע ליום</small><strong id="periodAverage">0</strong></div></div><div id="reportComparison"></div><div id="reportTrend"></div></div><div class="feature"><h3>📋 דיווחי מנויים</h3><div id="activity"></div></div></section></main><footer>COFFEE CHAMPIONS · קליית בראשית</footer>
-<section id="login" class="login hidden"><h2>כניסת מנהל</h2><label>שם סניף / מנהל אזור</label><input id="username" autocomplete="username" placeholder="לדוגמה: צפת"><label>סיסמה</label><input id="password" type="password" autocomplete="current-password"><div class="muted" style="font-size:12px;margin-top:8px">התחברות באמצעות שם המשתמש והסיסמה שקיבלת ממנהל האזור.</div><div class="actions" style="margin-top:14px"><button id="signin">כניסה</button><button class="secondary" id="cancel">סגירה</button></div><details style="margin-top:14px"><summary class="muted">הגדרת מנהל אזור בפעם הראשונה</summary><label>סוד האתחול מ-Cloudflare</label><input id="bootstrapSecret" type="password" autocomplete="off"><label>סיסמת מנהל אזור חדשה (12 תווים לפחות)</label><input id="bootstrapPassword" type="password" autocomplete="new-password"><button id="setupAdmin" style="margin-top:10px">הגדרת מנהל אזור</button></details></section>
-<section id="editor" class="editor hidden"><div class="head"><h2 id="editorTitle">דיווח סניף</h2><button class="secondary" id="signout">יציאה</button></div><div id="managerReport"><label>שם העובד</label><input id="employee" placeholder="שם העובד"><label>כמה מנויים ביצע?</label><input id="subscriptions" type="number" min="1" step="1" placeholder="מספר מנויים"><div class="actions"><button id="saveReport">שמירת דיווח</button></div></div><div id="adminPanel" class="hidden"><div class="card"><h3>🔐 ניהול סיסמאות סניפים</h3><label>בחירת סניף</label><select id="passwordBranch"></select><label>סיסמה חדשה (10 תווים לפחות)</label><input id="branchPassword" type="password" autocomplete="new-password"><button id="saveBranchPassword">שמירת סיסמת הסניף</button></div><p class="muted">דירוג התחרות והעדכון מוצגים בלשונית תחרות הקפה.</p></div></section>
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909"><meta name="application-name" content="קליית בראשית"><meta name="apple-mobile-web-app-title" content="קליית בראשית">
+<link rel="manifest" href="/manifest.webmanifest"><link rel="apple-touch-icon" href="/assets/coffee-champions.svg"><link rel="icon" type="image/svg+xml" href="/assets/coffee-champions.svg">
+<title>מנויים | קליית בראשית</title>
+<style>
+:root{--red:#e32636;--bg:#090909;--panel:#171717;--line:#383838;--muted:#aaa}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{background:radial-gradient(ellipse at top,#281015,#090909 56%);color:#f5f5f5;font-family:Arial,sans-serif;min-height:100vh}
+header{text-align:center;padding:28px 14px 20px;background:#090909;border-bottom:1px solid #632630}
+.brand{font-size:25px;font-weight:900;color:#fff}.eyebrow{margin-top:8px;color:#ff6974;font-size:11px;letter-spacing:4px;font-weight:bold}
+h1{font-size:clamp(27px,6vw,40px);margin:10px 0 4px}h1 span{color:#f04452}
+.sub{color:#aaa;font-size:14px}
+main{width:min(860px,100%);margin:auto;padding:18px 13px 54px}
+button{border:0;border-radius:10px;padding:12px 15px;background:var(--red);color:#fff;font-weight:bold;font-size:15px;cursor:pointer}
+button.secondary{background:#292929;border:1px solid #444}
+button:disabled{opacity:.55;cursor:wait}
+.toolbar,.actions,.head{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.panel,.employee-card{background:linear-gradient(145deg,#1b1b1b,#111);border:1px solid var(--line);border-radius:15px;padding:15px;margin:12px 0}
+.branch-label{font-size:13px;color:#ff9aa2;font-weight:bold;letter-spacing:.5px}
+.branch-title{font-size:23px;font-weight:900;margin-top:5px}
+.note{color:#aaa;font-size:13px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.employee-card{margin:0;padding:14px}
+.employee-name{font-size:17px;font-weight:900;margin:2px 0 12px;min-height:40px}
+label{display:block;color:#bbb;font-size:13px;margin:10px 0 6px}
+input,select{display:block;width:100%;padding:12px;background:#090909;color:#fff;border:1px solid #484848;border-radius:9px;font-size:16px}
+input[type=file]{font-size:13px;padding:10px}
+.count{font-size:23px;font-weight:900;text-align:center}
+.employee-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.employee-actions button{flex:1}
+.receipt-state{color:#aaa;font-size:12px;margin-top:10px;min-height:18px}
+.updated{color:#aaa;font-size:11px;margin-top:8px}
+.summary{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.summary strong{font-size:26px;color:#ff5967}
+.login,.modal{position:fixed;z-index:100;inset:0;background:#000c;display:flex;align-items:center;justify-content:center;padding:14px}
+.dialog{width:min(440px,100%);max-height:90dvh;overflow:auto;padding:19px;border:1px solid #a33b47;border-radius:16px;background:#171717;box-shadow:0 22px 70px #000e}
+.hidden{display:none!important}
+.notice{display:none;padding:12px;margin:12px 0;border:1px solid #80323c;border-radius:10px;background:#281418;color:#ffe1e4;line-height:1.5}
+.modal img{display:block;max-width:100%;max-height:70dvh;object-fit:contain;margin:12px auto;border-radius:8px}
+.divider{height:1px;background:#333;margin:15px 0}
+@media(max-width:560px){header{padding-top:22px}.grid{grid-template-columns:1fr}.employee-name{min-height:0}.employee-card{padding:14px}main{padding-left:10px;padding-right:10px}.summary{justify-content:space-between}}
+@media(prefers-reduced-motion:no-preference){.employee-card{animation:up .35s both}@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+<header><div class="brand">קליית בראשית</div><div class="eyebrow">COFFEE CHAMPIONS</div><h1>ניהול <span>מנויים</span></h1><div class="sub">ביתר עילית A · ביתר עילית B</div></header>
+<main>
+<div id="notice" class="notice" role="status"></div>
+<section id="workspace" class="hidden">
+  <div class="panel">
+    <div class="toolbar"><div><div class="branch-label">ניהול מנויים</div><div class="branch-title" id="branchTitle">ביתר עילית A</div></div><button class="secondary" id="refresh">רענון</button></div>
+    <div id="adminBranchWrap" class="hidden"><label for="branchSelect">בחירת סניף</label><select id="branchSelect"><option>ביתר עילית A</option><option>ביתר עילית B</option></select></div>
+    <div class="divider"></div>
+    <div class="summary"><div><span class="note">סה״כ מנויים בסניף</span><br><strong id="branchTotal">0</strong></div><div class="note">עדכון מספר העובדים והעלאת צילום קבלה</div></div>
+  </div>
+  <div class="grid" id="employees"></div>
+  <section id="adminTools" class="panel hidden">
+    <h3>ניהול סיסמאות סניפים</h3>
+    <div class="note">אפשר להגדיר או להחליף סיסמה לכל אחד משני הסניפים.</div>
+    <label for="passwordBranch">סניף</label><select id="passwordBranch"><option>ביתר עילית A</option><option>ביתר עילית B</option></select>
+    <label for="branchPassword">סיסמה חדשה (לפחות 10 תווים)</label><input id="branchPassword" type="password" autocomplete="new-password">
+    <button id="saveBranchPassword" style="margin-top:12px">שמירת סיסמת הסניף</button>
+  </section>
+  <div class="actions" style="margin-top:16px"><span class="note" id="signedInAs"></span><button class="secondary" id="signout">יציאה</button></div>
+</section>
+</main>
+<section id="loginLayer" class="login">
+ <div class="dialog">
+  <h2 style="margin-top:0">כניסת מנהל</h2>
+  <div class="note">התחבר עם שם המשתמש והסיסמה שקיבלת.</div>
+  <label for="username">שם משתמש</label><input id="username" autocomplete="username" placeholder="ביתר עילית A / ביתר עילית B">
+  <label for="password">סיסמה</label><input id="password" type="password" autocomplete="current-password">
+  <button id="signin" style="width:100%;margin-top:14px">כניסה</button>
+  <details style="margin-top:16px"><summary class="note">הגדרת מנהל אזור בפעם הראשונה</summary>
+   <label for="bootstrapSecret">סוד האתחול מ־Cloudflare</label><input id="bootstrapSecret" type="password" autocomplete="off">
+   <label for="bootstrapPassword">סיסמת מנהל אזור חדשה (12 תווים לפחות)</label><input id="bootstrapPassword" type="password" autocomplete="new-password">
+   <button id="setupAdmin" style="width:100%;margin-top:12px">הגדרת מנהל אזור</button>
+  </details>
+ </div>
+</section>
+<section id="receiptModal" class="modal hidden"><div class="dialog"><div class="head"><h3 id="receiptTitle">קבלה</h3><button class="secondary" id="closeReceipt">סגירה</button></div><img id="receiptImage" alt="צילום קבלה"></div></section>
 <script>
 (()=>{'use strict';
-const BRANCHES=['תל אביב','צפת','אשדוד אזור ג','אשדוד אזור ז','רחובות','מודיעין','קריית ספר','בית שמש נעימי','בית שמש רמה א','בית שמש רמה ד','ירושלים גאולה','ירושלים בית וגן','פתח תקווה','ביתר עילית A'];
-let state={reports:[],targets:{},coffee:{}},session=null;const $=id=>document.getElementById(id);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const fmt=n=>Number(n||0).toLocaleString('he-IL');
-function updateCountdown(){const end=new Date(2027,0,1,0,0,0).getTime(),left=end-Date.now(),el=$('countdownClock');if(left<=0){el.innerHTML='<div class="countdown-ended" style="grid-column:1/-1">🏁 התחרות הסתיימה! תודה לכל הסניפים על ההשתתפות</div>';return}const d=Math.floor(left/86400000),h=Math.floor(left%86400000/3600000),m=Math.floor(left%3600000/60000),sec=Math.floor(left%60000/1000);el.innerHTML=[[d,'ימים'],[h,'שעות'],[m,'דקות'],[sec,'שניות']].map(([v,l])=>'<div class="count-unit"><strong>'+String(v).padStart(2,'0')+'</strong><span>'+l+'</span></div>').join('')}
-function notice(t){$('notice').textContent=t;$('notice').style.display='block'}function clearNotice(){$('notice').style.display='none'}
-async function api(path,options={}){const r=await fetch('/api/'+path,{headers:{'Content-Type':'application/json'},...options});const j=await r.json().catch(()=>({error:'תגובה לא תקינה מהשרת'}));if(!r.ok)throw Error(j.error||'שגיאת שרת');return j}
-async function load(){try{const publicState=await api('state');state={...publicState,reports:[],targets:publicState.targets||{},coffee:publicState.coffee||{}};if(!session){try{const auth=await api('me');session=auth.user;$('managerReport').classList.toggle('hidden',session.role!=='branch');$('adminPanel').classList.toggle('hidden',session.role!=='admin');$('editor').classList.remove('hidden');$('editorTitle').textContent=session.role==='admin'?'ניהול תחרות וסיסמאות':'דיווח סניף – '+session.branch;if(session.role==='admin'){$('passwordBranch').innerHTML=BRANCHES.map(b=>'<option value="'+esc(b)+'">'+esc(b)+'</option>').join('')}else{showTab('subs')}configureReportBranches()}catch{}}if(session){const privateData=await api('reports');state.reports=privateData.reports||[];configureReportBranches()}render();}catch(e){if(e.message.includes('להתחבר')){session=null;state.reports=[];render()}else notice('הענן עדיין לא הוגדר או שיש תקלה: '+e.message+'.')}}
-function totals(){return BRANCHES.map(name=>{const rs=state.reports.filter(r=>r.branch===name);return{name,rs,subs:rs.reduce((n,r)=>n+Number(r.subscriptions||0),0)}})}
-function coffeeTotals(){return BRANCHES.map(name=>{const x=state.coffee?.[name]||{};return{name,general:Number(x.general_progress||0),vietnam:Number(x.vietnam_progress||0)}}).sort((a,b)=>b.general-a.general)}
-function showTab(t){$('coffeePanel').classList.toggle('hidden',t!=='coffee');$('subsPanel').classList.toggle('hidden',t!=='subs');$('tabCoffee').classList.toggle('secondary',t!=='coffee');$('tabSubs').classList.toggle('secondary',t!=='subs')}
-function render(){const a=totals();$('totalSubs').textContent=fmt(a.reduce((n,x)=>n+x.subs,0));$('reportCount').textContent=fmt(state.reports.length);renderSmartReports();const recent=[...state.reports].sort((x,y)=>String(y.created_at).localeCompare(String(x.created_at)));const grouped=BRANCHES.map(branch=>({branch,items:recent.filter(r=>r.branch===branch)})).filter(g=>g.items.length);$('activity').innerHTML=grouped.map(g=>'<div class="card" style="margin:10px 0"><h3>'+esc(g.branch)+' · סה״כ '+fmt(g.items.reduce((n,r)=>n+Number(r.subscriptions||0),0))+' מנויים</h3>'+g.items.map(r=>'<div class="activity"><span>דיווח</span><b>+'+fmt(r.subscriptions)+'</b></div>').join('')+'</div>').join('')||'<small>אין דיווחים עדיין</small>'}
-function configureReportBranches(){const sel=$('reportBranch');if(!sel)return;const allowed=session?.role==='admin'?BRANCHES:[session?.branch].filter(Boolean);$('reportBranchWrap').classList.toggle('hidden',session?.role!=='admin');sel.innerHTML='<option value="">כל הסניפים</option>'+allowed.map(b=>'<option value="'+esc(b)+'">'+esc(b)+'</option>').join('');renderSmartReports()}
-function reportDate(r){const d=new Date(r.created_at);return Number.isNaN(d.getTime())?null:d}
-function filteredReports(){const from=$('reportFrom').value,to=$('reportTo').value,branch=$('reportBranch').value;return state.reports.filter(r=>{const d=reportDate(r);if(!d)return false;const day=d.toISOString().slice(0,10);return(!from||day>=from)&&(!to||day<=to)&&(!branch||r.branch===branch)})}
-function renderSmartReports(){const rows=filteredReports(),sum=rows.reduce((n,r)=>n+Number(r.subscriptions||0),0),days=new Set(rows.map(r=>reportDate(r)?.toISOString().slice(0,10)).filter(Boolean));$('periodSubs').textContent=fmt(sum);$('periodReports').textContent=fmt(rows.length);$('periodAverage').textContent=fmt(days.size?sum/days.size:0);const byBranch={};rows.forEach(r=>{const b=r.branch||'לא ידוע';byBranch[b]=(byBranch[b]||0)+Number(r.subscriptions||0)});const ranked=Object.entries(byBranch).sort((a,b)=>b[1]-a[1]);const max=Math.max(1,...ranked.map(x=>x[1]));$('reportComparison').innerHTML='<h3>השוואת סניפים בתקופה</h3>'+(ranked.map(([b,n],i)=>'<div style="margin:10px 0"><div class="progress-meta"><b>'+esc(b)+'</b><strong>'+fmt(n)+' מנויים</strong></div><div class="bar"><i style="width:'+(n/max*100)+'%"></i></div></div>').join('')||'<small class="muted">אין נתונים לתקופה שנבחרה.</small>');const daily={};rows.forEach(r=>{const d=reportDate(r);if(d){const k=d.toISOString().slice(0,10);daily[k]=(daily[k]||0)+Number(r.subscriptions||0)}});const trend=Object.entries(daily).sort((a,b)=>a[0].localeCompare(b[0])).slice(-14),dm=Math.max(1,...trend.map(x=>x[1]));$('reportTrend').innerHTML='<h3>מגמת דיווחים – 14 ימים אחרונים עם פעילות</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(38px,1fr));gap:6px;align-items:end;min-height:130px">'+trend.map(([d,n])=>'<div style="text-align:center"><small>'+fmt(n)+'</small><div class="bar" style="height:75px;display:flex;align-items:end;margin:4px 0"><i style="width:100%;height:'+(n/dm*100)+'%"></i></div><small>'+d.slice(5)+'</small></div>').join('')+'</div>'+(trend.length?'':'<small class="muted">אין נתונים להצגה.</small>')}
-function exportSmartReports(){const rows=filteredReports(),byBranch={};rows.forEach(r=>{const b=r.branch||'לא ידוע';byBranch[b]=(byBranch[b]||0)+Number(r.subscriptions||0)});const total=rows.reduce((n,r)=>n+Number(r.subscriptions||0),0),from=$('reportFrom').value||'ללא הגבלה',to=$('reportTo').value||'ללא הגבלה',branch=$('reportBranch').value||'כל הסניפים';const body=Object.entries(byBranch).sort((a,b)=>b[1]-a[1]).map(([b,n])=>'<tr><td>'+esc(b)+'</td><td>'+fmt(n)+'</td></tr>').join('');const w=window.open('','_blank');if(!w){notice('יש לאפשר פתיחת חלונות קופצים כדי להפיק PDF.');return}w.document.write('<!doctype html><html lang="he" dir="rtl"><meta charset="utf-8"><title>דוח מנויים – קליית בראשית</title><style>body{font-family:Arial,sans-serif;padding:32px;color:#171717}h1{color:#9b1725}p{color:#444}.summary{display:flex;gap:30px;margin:24px 0;font-weight:bold}table{width:100%;border-collapse:collapse;margin-top:20px}th,td{padding:12px;border:1px solid #ccc;text-align:right}th{background:#eee}.foot{margin-top:28px;color:#777;font-size:12px}@media print{button{display:none}}</style><h1>קליית בראשית – דוח מנויים</h1><p>תקופה: '+esc(from)+' עד '+esc(to)+' | סינון סניף: '+esc(branch)+'</p><div class="summary"><span>סה״כ מנויים: '+fmt(total)+'</span><span>מספר דיווחים: '+fmt(rows.length)+'</span></div><table><thead><tr><th>סניף</th><th>מספר מנויים</th></tr></thead><tbody>'+(body||'<tr><td colspan="2">אין נתונים לתקופה שנבחרה</td></tr>')+'</tbody></table><div class="foot">הדוח אינו כולל שמות עובדים או פרטים אישיים.</div><script>window.onload=()=>window.print()<\/script></html>');w.document.close()}
-async function login(){try{const result=await api('login',{method:'POST',body:JSON.stringify({username:$('username').value.trim(),password:$('password').value})});session=result.user;configureReportBranches();$('login').classList.add('hidden');$('password').value='';$('editor').classList.remove('hidden');$('managerReport').classList.toggle('hidden',session.role!=='branch');$('adminPanel').classList.toggle('hidden',session.role!=='admin');$('editorTitle').textContent=session.role==='admin'?'ניהול תחרות וסיסמאות':'דיווח סניף – '+session.branch;if(session.role==='admin'){renderCoffeeInputs();$('passwordBranch').innerHTML=BRANCHES.map(b=>'<option value="'+esc(b)+'">'+esc(b)+'</option>').join('')}clearNotice();showTab('subs');await load()}catch(e){notice(e.message)}}
-function renderCoffeeInputs(){$('coffeeInputs').innerHTML=BRANCHES.map(b=>{const x=state.coffee[b]||{};return '<div class="card"><h3>'+esc(b)+'</h3><label>אחוז התקדמות – תחרות כללית (כל סוגי הקפה)</label><input type="number" min="0" step="0.1" data-general="'+b+'" value="'+Number(x.general_progress||0)+'"><label>אחוז התקדמות – קפה וייטנאם</label><input type="number" min="0" step="0.1" data-vietnam="'+b+'" value="'+Number(x.vietnam_progress||0)+'"><button type="button" class="secondary" data-reset-coffee="'+esc(b)+'" style="margin-top:10px">איפוס גרף לסניף</button></div>'}).join('');document.querySelectorAll('[data-reset-coffee]').forEach(button=>{button.onclick=()=>resetCoffee(button.getAttribute('data-reset-coffee'))})}
-async function resetCoffee(branch){if(!session||session.role!=='admin')return;if(!confirm('לאפס את אחוזי ההתקדמות של '+branch+' לאפס? דיווחי המנויים לא יימחקו.'))return;try{await api('coffee',{method:'POST',body:JSON.stringify({branch})});await load();renderCoffeeInputs();notice('גרף ההתקדמות של '+branch+' אופס. דיווחי המנויים נשמרו.')}catch(e){notice('איפוס הגרף נכשל: '+e.message)}}
- async function saveReport(){if(!session||session.role!=='branch')return;const employee=$('employee').value.trim(),subscriptions=Number($('subscriptions').value);if(!employee||!Number.isInteger(subscriptions)||subscriptions<1){notice('יש להזין שם עובד ומספר מנויים חיובי.');return}try{await api('report',{method:'POST',body:JSON.stringify({branch:session.branch,employee,subscriptions})});$('employee').value='';$('subscriptions').value='';notice('הדיווח נשמר בהצלחה.');await load()}catch(e){notice('שמירת הדיווח נכשלה: '+e.message)}}
-async function saveCoffee(){if(!session||session.role!=='admin')return;const entries={};BRANCHES.forEach(b=>entries[b]={general_progress:Number(document.querySelector('[data-general="'+b+'"]').value),vietnam_progress:Number(document.querySelector('[data-vietnam="'+b+'"]').value)});try{await api('coffee',{method:'PUT',body:JSON.stringify({entries})});notice('אחוזי התקדמות התחרות נשמרו.');await load()}catch(e){notice('שמירת נתוני התחרות נכשלה: '+e.message)}}
-$('showLogin').onclick=()=>{$('login').classList.remove('hidden');clearNotice()};$('cancel').onclick=()=>$('login').classList.add('hidden');$('signin').onclick=login;$('setupAdmin').onclick=async()=>{try{const result=await api('setup',{method:'POST',body:JSON.stringify({secret:$('bootstrapSecret').value,password:$('bootstrapPassword').value})});notice(result.message||'מנהל האזור הוגדר.');$('bootstrapSecret').value='';$('bootstrapPassword').value='';}catch(e){notice(e.message)}};$('saveReport').onclick=saveReport;$('saveBranchPassword').onclick=async()=>{const branch=$('passwordBranch').value,password=$('branchPassword').value;try{await api('users',{method:'POST',body:JSON.stringify({branch,password})});$('branchPassword').value='';notice('הסיסמה של '+branch+' עודכנה.');}catch(e){notice(e.message)}};$('tabCoffee').onclick=()=>showTab('coffee');$('reportFrom').onchange=renderSmartReports;$('reportTo').onchange=renderSmartReports;$('reportBranch').onchange=renderSmartReports;$('clearReportFilters').onclick=()=>{$('reportFrom').value='';$('reportTo').value='';$('reportBranch').value='';renderSmartReports()};$('exportReports').onclick=exportSmartReports;$('tabSubs').onclick=()=>showTab('subs');$('refresh').onclick=load;$('signout').onclick=async()=>{try{await api('logout',{method:'POST',body:'{}'})}catch{}session=null;state.reports=[];$('editor').classList.add('hidden');render();notice('התנתקת מהמערכת.')};showTab('coffee');updateCountdown();setInterval(updateCountdown,1000);load();setInterval(load,20000);
+const BRANCHES=['ביתר עילית A','ביתר עילית B'];
+const EMPLOYEES=['יהודה בן גיגי','נהוראי מלכה','אוריאל דוד פנחסי','ישי אלמקייס'];
+const $=id=>document.getElementById(id);
+let session=null,currentBranch=BRANCHES[0],rows=[];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function notify(message){$('notice').textContent=message;$('notice').style.display='block'}
+function clearNotice(){$('notice').style.display='none'}
+async function api(path,options={}){
+ const headers=options.body instanceof FormData?{}:{'Content-Type':'application/json'};
+ const response=await fetch('/api/'+path,{credentials:'same-origin',headers:{...headers,...(options.headers||{})},...options});
+ const data=await response.json().catch(()=>({error:'תגובה לא תקינה מהשרת'}));
+ if(!response.ok)throw Error(data.error||'שגיאת שרת');
+ return data;
+}
+function showWorkspace(){
+ $('loginLayer').classList.add('hidden');$('workspace').classList.remove('hidden');
+ $('signedInAs').textContent='מחובר: '+(session.role==='admin'?'מנהל אזור':session.branch);
+ $('adminBranchWrap').classList.toggle('hidden',session.role!=='admin');
+ $('adminTools').classList.toggle('hidden',session.role!=='admin');
+ if(session.role==='branch')currentBranch=session.branch;
+ $('branchSelect').value=currentBranch;
+}
+async function load(){
+ clearNotice();
+ try{
+  const suffix=session.role==='admin'?'?branch='+encodeURIComponent(currentBranch):'';
+  const data=await api('reports'+suffix);
+  currentBranch=data.branch;rows=data.employees||[];
+  $('branchTitle').textContent=currentBranch;
+  $('branchTotal').textContent=rows.reduce((n,r)=>n+Number(r.subscriptions||0),0).toLocaleString('he-IL');
+  $('employees').innerHTML=rows.map((r,i)=>'<article class="employee-card" data-employee="'+esc(r.employee)+'"><div class="employee-name">'+esc(r.employee)+'</div><label for="count-'+i+'">מספר מנויים נוכחי</label><input class="count" id="count-'+i+'" type="number" min="0" max="100000" step="1" inputmode="numeric" value="'+Number(r.subscriptions||0)+'"><label for="file-'+i+'">צילום קבלה (לא חובה בכל עדכון)</label><input id="file-'+i+'" type="file" accept="image/*" capture="environment"><div class="employee-actions"><button data-save="'+i+'">שמירת עדכון</button>'+(r.has_receipt?'<button class="secondary" data-receipt="'+i+'">צפייה בקבלה</button>':'')+'</div><div class="receipt-state">'+(r.has_receipt?'קבלה שמורה':'עדיין לא הועלתה קבלה')+'</div><div class="updated">'+(r.updated_at?'עודכן: '+esc(new Date(r.updated_at).toLocaleString('he-IL')):'טרם עודכן')+'</div></article>').join('');
+  document.querySelectorAll('[data-save]').forEach(button=>button.addEventListener('click',()=>saveEmployee(Number(button.dataset.save),button)));
+  document.querySelectorAll('[data-receipt]').forEach(button=>button.addEventListener('click',()=>viewReceipt(Number(button.dataset.receipt))));
+ }catch(error){notify(error.message)}
+}
+function blobToBase64(blob){return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]||'');reader.onerror=()=>reject(new Error('לא ניתן לקרוא את התמונה'));reader.readAsDataURL(blob)})}
+function compressImage(file){
+ return new Promise((resolve,reject)=>{
+  if(!file.type.startsWith('image/'))return reject(new Error('יש לבחור קובץ תמונה.'));
+  if(file.size>15*1024*1024)return reject(new Error('התמונה המקורית גדולה מדי. בחר תמונה עד 15MB.'));
+  const url=URL.createObjectURL(file),img=new Image();
+  img.onload=async()=>{
+   try{
+    let scale=Math.min(1,1280/Math.max(img.naturalWidth,img.naturalHeight));
+    let result=null;
+    for(let attempt=0;attempt<7;attempt++){
+     const canvas=document.createElement('canvas');
+     canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));
+     canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+     const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+     const quality=[.78,.68,.58,.5,.44,.4,.36][attempt];
+     result=await new Promise(res=>canvas.toBlob(res,'image/jpeg',quality));
+     if(result&&result.size<=850*1024)break;
+     scale*=.82;
+    }
+    URL.revokeObjectURL(url);
+    if(!result||result.size>850*1024)return reject(new Error('לא הצלחנו לדחוס את התמונה לגודל המתאים. נסה צילום קטן יותר.'));
+    resolve(result);
+   }catch(e){URL.revokeObjectURL(url);reject(e)}
+  };
+  img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('לא ניתן לפתוח את התמונה.'))};
+  img.src=url;
+ });
+}
+async function saveEmployee(index,button){
+ const row=rows[index];if(!row)return;
+ const card=button.closest('.employee-card');
+ const value=Number(card.querySelector('input[type=number]').value);
+ const file=card.querySelector('input[type=file]').files[0];
+ if(!Number.isInteger(value)||value<0||value>100000){notify('יש להזין מספר שלם בין 0 ל־100,000.');return}
+ button.disabled=true;button.textContent='שומר...';clearNotice();
+ try{
+  let receipt=null;
+  if(file){const compressed=await compressImage(file);receipt=await blobToBase64(compressed)}
+  await api('report',{method:'POST',body:JSON.stringify({branch:currentBranch,employee:row.employee,subscriptions:value,receipt})});
+  notify('העדכון של '+row.employee+' נשמר בהצלחה.');
+  await load();
+ }catch(error){notify(error.message)}
+ finally{button.disabled=false;button.textContent='שמירת עדכון'}
+}
+async function viewReceipt(index){
+ const row=rows[index];if(!row)return;
+ try{
+  const params=new URLSearchParams({employee:row.employee});
+  if(session.role==='admin')params.set('branch',currentBranch);
+  const data=await api('receipt?'+params.toString());
+  $('receiptTitle').textContent='קבלה – '+row.employee;
+  $('receiptImage').src='data:'+(data.type||'image/jpeg')+';base64,'+data.data;
+  $('receiptModal').classList.remove('hidden');
+ }catch(error){notify(error.message)}
+}
+async function login(){
+ clearNotice();
+ try{
+  const result=await api('login',{method:'POST',body:JSON.stringify({username:$('username').value.trim(),password:$('password').value})});
+  session=result.user;currentBranch=session.role==='branch'?session.branch:BRANCHES[0];
+  $('password').value='';showWorkspace();await load();
+ }catch(error){notify(error.message)}
+}
+async function setBranchPassword(){
+ const branch=$('passwordBranch').value,password=$('branchPassword').value;
+ try{
+  await api('users',{method:'POST',body:JSON.stringify({branch,password})});
+  $('branchPassword').value='';notify('הסיסמה של '+branch+' נשמרה.');
+ }catch(error){notify(error.message)}
+}
+$('signin').onclick=login;
+$('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
+$('refresh').onclick=load;
+$('branchSelect').onchange=async()=>{if(session.role==='admin'){currentBranch=$('branchSelect').value;await load()}};
+$('saveBranchPassword').onclick=setBranchPassword;
+$('signout').onclick=async()=>{
+ try{await api('logout',{method:'POST',body:'{}'})}catch{}
+ session=null;rows=[];$('workspace').classList.add('hidden');$('loginLayer').classList.remove('hidden');notify('התנתקת מהמערכת.');
+};
+$('setupAdmin').onclick=async()=>{
+ try{
+  const result=await api('setup',{method:'POST',body:JSON.stringify({secret:$('bootstrapSecret').value,password:$('bootstrapPassword').value})});
+  notify(result.message||'מנהל האזור הוגדר.');
+  $('bootstrapSecret').value='';$('bootstrapPassword').value='';
+ }catch(error){notify(error.message)}
+};
+$('closeReceipt').onclick=()=>{$('receiptModal').classList.add('hidden');$('receiptImage').removeAttribute('src')};
+$('receiptModal').addEventListener('click',event=>{if(event.target===$('receiptModal'))$('closeReceipt').click()});
+(async()=>{
+ try{const result=await api('me');session=result.user;currentBranch=session.role==='branch'?session.branch:BRANCHES[0];showWorkspace();await load()}
+ catch{$('loginLayer').classList.remove('hidden')}
 })();
-</script></body></html>
+})();
+</script>
+</body></html>
