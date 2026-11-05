@@ -1,10 +1,12 @@
-import {json,sameOrigin} from "./_auth.js";
+import {json,sameOrigin,requireAuth,canAccessBranch} from "./_auth.js";
 const BRANCHES=["ביתר עילית A","ביתר עילית B"],EMPLOYEES=["יהודה בן גיגי","נהוראי מלכה","אוריאל דוד פנחסי","ישי אלמקייס"];
 const MAX_RECEIPT_BASE64=1250000;
 export async function onRequestPost({request,env}){try{
  if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
+ const user=await requireAuth(request,env);if(!user)return json({error:"יש להתחבר כדי לדווח מנוי."},401);
  const body=await request.json(),branch=String(body.branch||""),employee=String(body.employee||""),receipt=String(body.receipt||"");
- if(!BRANCHES.includes(branch)||!EMPLOYEES.includes(employee))return json({error:"יש לבחור סניף ועובד מהרשימה."},400);
+ if(!BRANCHES.includes(branch)||!canAccessBranch(user,branch))return json({error:"אין הרשאה לעדכן את הסניף הזה."},403);
+ if(!EMPLOYEES.includes(employee))return json({error:"יש לבחור עובד מהרשימה."},400);
  if(!receipt)return json({error:"כדי להוסיף מנוי יש לצרף צילום קבלה."},400);
  if(receipt.length>MAX_RECEIPT_BASE64||!/^[A-Za-z0-9+/]+={0,2}$/.test(receipt))return json({error:"התמונה גדולה מדי או אינה תקינה."},413);
  const addReceipt=env.COFFEE_DB.prepare("INSERT INTO subscription_receipts(branch,employee,receipt_data,receipt_type) VALUES(?,?,?,'image/jpeg')").bind(branch,employee,receipt);
