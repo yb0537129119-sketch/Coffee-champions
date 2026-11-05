@@ -3,7 +3,7 @@ const BRANCHES=["ביתר עילית A","ביתר עילית B"],EMPLOYEES=["י�
 const MAX_RECEIPT_BASE64=1250000;
 export async function onRequestPost({request,env}){try{
  if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
- const user=await requireAuth(request,env);if(!user)return json({error:"יש להתחבר כדי לדווח מנוי."},401);
+ 
  const body=await request.json(),branch=String(body.branch||""),employee=String(body.employee||""),receipt=String(body.receipt||"");
  if(!BRANCHES.includes(branch)||!canAccessBranch(user,branch))return json({error:"אין הרשאה לעדכן את הסניף הזה."},403);
  if(!EMPLOYEES.includes(employee))return json({error:"יש לבחור עובד מהרשימה."},400);
