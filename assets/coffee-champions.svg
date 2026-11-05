@@ -1,1 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180"><rect width="180" height="180" fill="#ffffff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" fill="#050505"/>
+<g fill="none" stroke="#e6d2ad" stroke-width="17" stroke-linecap="round" stroke-linejoin="round">
+<path d="M256 330 C246 286 250 235 256 190 M256 265 C220 250 197 220 183 184 M256 252 C291 231 319 203 331 165 M253 224 C228 204 215 176 210 145 M262 216 C282 191 291 164 294 132 M222 252 C188 246 161 228 142 202 M289 248 C326 245 354 224 374 199 M190 220 C166 214 148 196 139 175 M324 219 C350 213 369 194 380 171 M231 196 C210 180 199 156 199 132 M277 192 C295 173 304 151 305 128"/>
+<path d="M256 326 C239 350 224 367 199 380 M256 326 C272 350 289 366 315 380 M256 325 L256 391"/>
+</g>
+<g fill="#e6d2ad">
+<circle cx="169" cy="160" r="7"/><circle cx="205" cy="118" r="7"/><circle cx="246" cy="105" r="7"/><circle cx="292" cy="103" r="7"/><circle cx="339" cy="126" r="7"/><circle cx="388" cy="158" r="7"/><circle cx="128" cy="197" r="7"/><circle cx="370" cy="225" r="7"/>
+</g>
+<g fill="#e6d2ad" font-family="Arial,sans-serif" font-weight="900" text-anchor="middle">
+<text x="256" y="454" font-size="78" letter-spacing="1">בראשית</text>
+<text x="256" y="493" font-size="29" letter-spacing="2">בית קלייה</text>
+</g></svg>
