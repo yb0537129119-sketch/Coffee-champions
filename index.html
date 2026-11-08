@@ -27,7 +27,7 @@ button{border:0;border-radius:10px;padding:13px 16px;background:var(--red);color
  <div class="branch-title">דיווח מנויים</div>
  <div class="note">בחרו סניף ואת השם שלכם, צרפו קבלה של מנוי חדש ולחצו שמירה. כל קבלה מוסיפה מנוי אחד אוטומטית לספירה המצטברת.</div>
 
- <label for="employee">השם שלי</label><select id="employee"><option value="">בחירת עובד</option><option>יהודה בן גיגי</option><option>נהוראי מלכה</option><option>אוריאל דוד פנחסי</option><option>דביר כהן</option></select>
+ <label for="employee">השם שלי</label><select id="employee"><option value="">בחירת עובד</option><option>יהודה בן גיגי</option><option>נהוראי מלכה</option><option>אוריאל דוד פנחסי</option><option>דביר כהן</option><option>שמואל שמואלי</option><option>יצחק סודרי</option></select>
  <label for="receipt">צילום קבלה – חובה לכל מנוי חדש</label><input id="receipt" type="file" accept="image/*" required>
  <button id="save">שמירת הקבלה והוספת מנוי</button>
 </section>
@@ -54,7 +54,7 @@ button{border:0;border-radius:10px;padding:13px 16px;background:var(--red);color
 <section id="modal" class="modal hidden"><div class="dialog"><div class="summary"><strong id="modalTitle">קבלה</strong><button id="close" style="width:auto;margin:0;background:#333">סגירה</button></div><img id="receiptImage" alt="צילום קבלה"></div></section>
 <script>
 (()=>{'use strict';
-const BRANCHES=['ביתר עילית A','ביתר עילית B'],EMPLOYEES=['יהודה בן גיגי','נהוראי מלכה','אוריאל דוד פנחסי','דביר כהן'];
+const BRANCHES=['ביתר עילית A','ביתר עילית B'],EMPLOYEES=['יהודה בן גיגי','נהוראי מלכה','אוריאל דוד פנחסי','דביר כהן','שמואל שמואלי','יצחק סודרי'];
 const $=id=>document.getElementById(id);let rows=[];let archiveRows=[];let toastTimer;
 function notice(s){$('notice').textContent=s;$('notice').style.display='block'}function clear(){ $('notice').style.display='none' }
 function celebrate(employee,branch,count){$('toastTitle').textContent='כל הכבוד, '+employee+'! 🏆';$('toastMessage').textContent='נוסף מנוי חדש בהצלחה לסניף '+branch+'. יש לך עכשיו '+count+' מנויים. ממשיכים לכבוש יעדים!';const t=$('congratsToast');t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),6500);for(let i=0;i<28;i++){const p=document.createElement('i');p.className='confetti';p.style.left=(Math.random()*100)+'vw';p.style.background=['#e32636','#f5c45e','#f5f5f5'][i%3];p.style.animationDelay=(Math.random()*.45)+'s';document.body.appendChild(p);setTimeout(()=>p.remove(),2400)}}
