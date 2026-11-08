@@ -1,5 +1,5 @@
 import {json,sameOrigin,requireAuth,canAccessBranch} from "./_auth.js";
-const BRANCHES=["ביתר עילית A","ביתר עילית B"],EMPLOYEES=["יהודה בן גיגי","נהוראי מלכה","אוריאל דוד פנחסי","ישי אלמקייס"];
+const BRANCHES=["ביתר עילית A","ביתר עילית B"],EMPLOYEES=["יהודה בן גיגי","נהוראי מלכה","אוריאל דוד פנחסי","דביר כהן"];
 const MAX_RECEIPT_BASE64=1250000;
 export async function onRequestPost({request,env}){try{
  if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
