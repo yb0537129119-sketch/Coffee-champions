@@ -1,6 +1,6 @@
 import {json,requireAuth,canAccessBranch} from "./_auth.js";
 const BRANCHES=["ביתר עילית A","ביתר עילית B"];
-const EMPLOYEES=["יהודה בן גיגי","נהוראי מלכה","אוריאל דוד פנחסי","דביר כהן"];
+const EMPLOYEES=["יהודה בן גיגי","נהוראי מלכה","אוריאל דוד פנחסי","דביר כהן","שמואל שמואלי","יצחק סודרי"];
 export async function onRequestGet({request,env}){
  try{
   
