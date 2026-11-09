@@ -24,3 +24,16 @@ export async function onRequestPost({request,env}){
   return json({ok:true,branch,employee});
  }catch{return json({error:"לא ניתן להוסיף את העובד. ודאו שהרצתם את עדכון 0011."},500)}
 }
+
+export async function onRequestDelete({request,env}){
+ try{
+  if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
+  const admin=await requireAuth(request,env,"admin");if(!admin)return json({error:"רק מנהל אזור יכול למחוק עובדים."},403);
+  const body=await request.json(),branch=String(body.branch||""),employee=String(body.employee||"");
+  if(!BRANCHES.includes(branch)||!employee)return json({error:"יש לבחור סניף ועובד תקינים."},400);
+  const exists=await env.COFFEE_DB.prepare("SELECT 1 AS ok FROM branch_employees WHERE branch=? AND employee=?").bind(branch,employee).first();
+  if(!exists)return json({error:"העובד לא נמצא ברשימת הסניף."},404);
+  await env.COFFEE_DB.prepare("DELETE FROM branch_employees WHERE branch=? AND employee=?").bind(branch,employee).run();
+  return json({ok:true,branch,employee,historyPreserved:true});
+ }catch{return json({error:"לא ניתן למחוק את העובד."},500)}
+}
