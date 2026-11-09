@@ -1,5 +1,5 @@
 import {json,sameOrigin,requireAuth} from "./_auth.js";
-const BRANCHES=["ביתר עילית A","ביתר עילית B"];
+const BRANCHES=["ביתר עילית A","ביתר עילית B","בית שמש רמה א","בית שמש רמה ד","בית שמש נעימי","צפת","תל אביב","קריית ספר","מודיעין","אשדוד ג","אשדוד ז","בני ברק","פתח תקווה","רחובות"];
 const EMPLOYEES=["יהודה בן גיגי","נהוראי מלכה","אוריאל דוד פנחסי","דביר כהן","שמואל שמואלי","יצחק סודרי"];
 export async function onRequestPost({request,env}){try{
  if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
