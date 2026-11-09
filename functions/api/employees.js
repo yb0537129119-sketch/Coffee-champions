@@ -15,9 +15,9 @@ export async function onRequestPost({request,env}){
   if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
   const user=await requireAuth(request,env);if(!user)return json({error:"נדרשת התחברות."},401);
   const body=await request.json(),requested=String(body.branch||""),branch=user.role==="admin"?requested:user.branch;
-  const employee=String(body.employee||"").trim().replace(/\\s+/g," ");
+  const employee=String(body.employee||"").trim().replace(/\s+/g," ");
   if(!BRANCHES.includes(branch)||!canAccessBranch(user,branch)||(user.role==="branch"&&requested&&requested!==user.branch))return json({error:"אין הרשאה להוסיף עובד לסניף הזה."},403);
-  if(employee.length<2||employee.length>80||/[<>\\u0000-\\u001f]/.test(employee))return json({error:"יש להזין שם עובד תקין (2 עד 80 תווים)."},400);
+  if(employee.length<2||employee.length>80||/[<>\u0000-\u001f]/.test(employee))return json({error:"יש להזין שם עובד תקין (2 עד 80 תווים)."},400);
   const existing=await env.COFFEE_DB.prepare("SELECT 1 AS ok FROM branch_employees WHERE branch=? AND employee=?").bind(branch,employee).first();
   if(existing)return json({error:"העובד כבר קיים ברשימת הסניף."},409);
   await env.COFFEE_DB.prepare("INSERT INTO branch_employees(branch,employee) VALUES(?,?)").bind(branch,employee).run();
