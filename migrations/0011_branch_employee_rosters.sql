@@ -9,13 +9,16 @@ INSERT OR IGNORE INTO branch_employees (branch,employee)
 SELECT DISTINCT branch,employee FROM employee_subscriptions;
 INSERT OR IGNORE INTO branch_employees (branch,employee)
 SELECT DISTINCT branch,employee FROM subscription_receipts;
-INSERT OR IGNORE INTO branch_employees (branch,employee)
-SELECT branch,employee FROM (
- SELECT 'ביתר עילית A' AS branch, employee FROM (
-  SELECT 'יהודה בן גיגי','נהוראי מלכה','אוריאל דוד פנחסי','דביר כהן','שמואל שמואלי','יצחק סודרי' AS employee
- )
- UNION ALL
- SELECT 'ביתר עילית B' AS branch, employee FROM (
-  SELECT 'יהודה בן גיגי','נהוראי מלכה','אוריאל דוד פנחסי','דביר כהן','שמואל שמואלי','יצחק סודרי' AS employee
- )
-);
+INSERT OR IGNORE INTO branch_employees (branch,employee) VALUES
+ ('ביתר עילית A','יהודה בן גיגי'),
+ ('ביתר עילית A','נהוראי מלכה'),
+ ('ביתר עילית A','אוריאל דוד פנחסי'),
+ ('ביתר עילית A','דביר כהן'),
+ ('ביתר עילית A','שמואל שמואלי'),
+ ('ביתר עילית A','יצחק סודרי'),
+ ('ביתר עילית B','יהודה בן גיגי'),
+ ('ביתר עילית B','נהוראי מלכה'),
+ ('ביתר עילית B','אוריאל דוד פנחסי'),
+ ('ביתר עילית B','דביר כהן'),
+ ('ביתר עילית B','שמואל שמואלי'),
+ ('ביתר עילית B','יצחק סודרי');
