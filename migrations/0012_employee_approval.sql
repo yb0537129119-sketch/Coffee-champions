@@ -1,3 +1,0 @@
-CREATE TABLE IF NOT EXISTS pending_subscriptions (id INTEGER PRIMARY KEY AUTOINCREMENT,branch TEXT NOT NULL,employee TEXT NOT NULL,receipt_data TEXT NOT NULL,receipt_type TEXT NOT NULL DEFAULT 'image/jpeg',status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','approved','rejected')),created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),reviewed_at TEXT,reviewed_by TEXT);
-CREATE INDEX IF NOT EXISTS idx_pending_branch_status ON pending_subscriptions(branch,status,created_at DESC);
-CREATE TABLE IF NOT EXISTS manager_review_links (branch TEXT PRIMARY KEY,token_hash TEXT NOT NULL,created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')));
