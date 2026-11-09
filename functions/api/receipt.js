@@ -1,10 +1,12 @@
 import {json,requireAuth,canAccessBranch} from "./_auth.js";
-const BRANCHES=["ביתר עילית A","ביתר עילית B"];
+const BRANCHES=["ביתר עילית A","ביתר עילית B","בית שמש רמה א","בית שמש רמה ד","בית שמש נעימי","צפת","תל אביב","קריית ספר","מודיעין","אשדוד ג","אשדוד ז","בני ברק","פתח תקווה","רחובות"];
 const EMPLOYEES=["יהודה בן גיגי","נהוראי מלכה","אוריאל דוד פנחסי","דביר כהן","שמואל שמואלי","יצחק סודרי"];
 export async function onRequestGet({request,env}){
  try{
   
-  const url=new URL(request.url),id=url.searchParams.get("id"),branch=url.searchParams.get("branch"),employee=url.searchParams.get("employee");
+  const user=await requireAuth(request,env);if(!user)return json({error:"נדרשת התחברות."},401);
+  const url=new URL(request.url),id=url.searchParams.get("id"),requested=url.searchParams.get("branch"),branch=user.role==="admin"?requested:user.branch,employee=url.searchParams.get("employee");
+  if(!canAccessBranch(user,branch))return json({error:"אין הרשאה לצפות בקבלה הזו."},403);
   let row;
   if(id){
    if(!BRANCHES.includes(branch)||!Number.isSafeInteger(Number(id))||Number(id)<1)return json({error:"הקבלה המבוקשת אינה זמינה."},404);
