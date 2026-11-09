@@ -74,7 +74,7 @@ async function load(silent=false){if(!silent)clear();const branch=$('branch').va
  $('lastUpdated').textContent='עודכן לאחרונה: '+new Date().toLocaleTimeString('he-IL');
  const totals=groups.map(x=>Number(x.subscriptions||0));$('branchCompare').classList.remove('hidden');$('branchCompare').innerHTML=groups.map((item,i)=>'<div class="compare-card"><small>'+escapeHtml(item.branch)+(totals[i]===Math.max(...totals)&&totals[i]>0?' · מוביל 🏆':'')+'</small><strong>'+totals[i].toLocaleString('he-IL')+'</strong><small>מנויים שנצברו</small></div>').join('');
  if(!currentUser){$('total').textContent=groups.reduce((n,x)=>n+Number(x.subscriptions||0),0).toLocaleString('he-IL');$('leaderBanner').classList.add('hidden');return}
- $('total').textContent=rows.reduce((n,r)=>n+Number(r.subscriptions||0),0).toLocaleString('he-IL');$('leaderBanner').classList.add('hidden');$('employees').innerHTML='';await loadArchive();
+ $('total').textContent=rows.reduce((n,r)=>n+Number(r.subscriptions||0),0).toLocaleString('he-IL');$('leaderBanner').classList.add('hidden');await loadArchive();
  }catch(e){if(!silent)notice(e.message)}}
 let knownReceiptIds=null;
 function notifyNewReceipt(r){const msg='נוצר מנוי חדש: '+r.employee+' · '+r.branch;if('Notification'in window&&Notification.permission==='granted'){const n=new Notification('קליית בראשית – מנוי חדש',{body:msg,icon:'/favicon.ico',tag:'receipt-'+r.id});n.onclick=()=>{window.focus();$('archivePanel').classList.remove('hidden');$('homePanel').classList.remove('hidden');document.querySelector('[data-tab="archive"]').click();};}const status=$('notifyStatus');if(status)status.textContent='🔔 '+msg+' · '+new Date(r.created_at).toLocaleTimeString('he-IL');}
