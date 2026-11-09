@@ -100,6 +100,7 @@ async function enter(user){currentUser=user;$('loginPanel').classList.add('hidde
 async function login(username,password,branch){try{const d=await api('login',{method:'POST',body:JSON.stringify({username,password})});if(branch&&(d.user?.role!=='branch'||d.user.branch!==branch))throw Error('אין הרשאה לסניף שנבחר.');if(!branch&&d.user?.role!=='admin')throw Error('החשבון אינו מנהל אזור.');await enter(d.user)}catch(e){$('loginNotice').style.display='block';$('loginNotice').textContent=e.message}}
 $('branchLogin').onclick=()=>{const b=$('loginBranch').value,p=$('loginPassword').value;if(!p)return notice('יש להזין קוד סניף.');login(b,p,b)};
 $('areaLogin').onclick=()=>login($('areaUsername').value.trim(),$('areaPassword').value,null);
+$('branchLogout').onclick=async()=>{try{await api('logout',{method:'POST',body:'{}'})}catch{}currentUser=null;$('loginPanel').classList.remove('hidden');document.querySelector('nav.tabs').classList.add('hidden');document.querySelector('main').classList.add('hidden');$('loginPassword').value='';$('areaPassword').value='';};
 async function init(){try{const d=await api('me');if(d.user)await enter(d.user)}catch{}}
 document.querySelectorAll('[data-tab]').forEach(tab=>tab.addEventListener('click',()=>{
  const target=tab.dataset.tab;
