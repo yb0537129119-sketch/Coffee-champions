@@ -4,8 +4,7 @@ const MAX_RECEIPT_BASE64=1250000;
 export async function onRequestPost({request,env}){try{
  if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
  
- const body=await request.json(),branch=String(body.branch||""),employee=String(body.employee||"").trim().replace(/\\s+/g," "),receipt=String(body.receipt||"");
- if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
+ const body=await request.json(),branch=String(body.branch||""),employee=String(body.employee||"").trim().replace(/\s+/g," "),receipt=String(body.receipt||"");
  if(!BRANCHES.includes(branch)||employee.length<2||employee.length>80)return json({error:"יש לבחור סניף ולהזין שם עובד תקין."},400);
  await env.COFFEE_DB.prepare("INSERT OR IGNORE INTO branch_employees(branch,employee) VALUES(?,?)").bind(branch,employee).run();
  if(!receipt)return json({error:"כדי להוסיף מנוי יש לצרף צילום קבלה."},400);
