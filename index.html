@@ -113,7 +113,7 @@ document.querySelectorAll('[data-tab]').forEach(tab=>tab.addEventListener('click
  const target=tab.dataset.tab;
  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));
  $('homePanel').classList.remove('hidden');
- $('reportPanel').classList.toggle('hidden',target!=='report');if(target==='report')clear();
+ $('reportPanel').classList.toggle('hidden',target!=='report');if(target==='report'){clear();loadReportEmployees();}
  $('archivePanel').classList.toggle('hidden',target!=='archive');
  if(target==='archive'){if(currentUser)loadArchive();else{$('archive').innerHTML='<div class="empty">לצפייה בקבלות יש להתחבר כמנהל סניף או כמנהל אזור דרך התפריט ☰.</div>';}}
 }));
