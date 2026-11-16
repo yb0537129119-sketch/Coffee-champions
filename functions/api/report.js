@@ -1,5 +1,5 @@
 import {json,sameOrigin} from "./_auth.js";
-const BRANCHES=["ביתר עילית A","ביתר עילית B","בית שמש רמה א","בית שמש רמה ד","בית שמש נעימי","צפת","תל אביב","קריית ספר","מודיעין","אשדוד ג","אשדוד ז","בני ברק","פתח תקווה","רחובות"];
+const BRANCHES=["ביתר עילית A","ביתר עילית B"];
 const MAX_RECEIPT_BASE64=1250000;
 export async function onRequestPost({request,env}){try{
  if(!sameOrigin(request))return json({error:"הבקשה נדחתה."},403);
