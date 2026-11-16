@@ -185,10 +185,22 @@ async function updateTask(id,status){const btn=document.querySelector('[data-tas
 async function deleteTask(id){if(!confirm('למחוק את המשימה הזו?'))return;try{await api('tasks',{method:'DELETE',body:JSON.stringify({id})});await loadTasks()}catch(e){notice(e.message)}}
 $('addTask').onclick=async()=>{const title=$('taskTitle').value.trim();if(title.length<2)return notice('יש להזין כותרת למשימה.');const b=$('addTask');b.disabled=true;try{await api('tasks',{method:'POST',body:JSON.stringify({title,details:$('taskDetails').value,branch:currentUser?.role==='admin'?$('taskBranch').value:currentUser?.branch,assignee:$('taskAssignee').value,due_date:$('taskDue').value,priority:$('taskPriority').value})});$('taskTitle').value='';$('taskDetails').value='';$('taskAssignee').value='';$('taskDue').value='';$('taskPriority').value='normal';notice('המשימה נוספה בהצלחה.');await loadTasks()}catch(e){notice(e.message)}finally{b.disabled=false}};
 $('refreshTasks').onclick=loadTasks;$('taskFilter').onchange=renderTasks;$('workerRefreshTasks').onclick=loadWorkerTasks;$('workerTaskBranch').onchange=loadWorkerTasks;
+function syncWorkerNotificationButton(){
+ const button=$('workerNotifications');if(!button)return;
+ if(!('Notification' in window)){button.textContent='🔔 הדפדפן לא תומך בהתראות';button.disabled=true;return}
+ const permission=Notification.permission;
+ button.disabled=false;
+ button.textContent=permission==='granted'?'✓ ההתראות מאושרות במכשיר הזה':permission==='denied'?'⚠️ ההתראות חסומות בהגדרות המכשיר':'🔔 הפעלת התראות על משימות חדשות';
+}
+syncWorkerNotificationButton();
 $('workerNotifications').onclick=async()=>{
  if(!('Notification' in window)){notice('הדפדפן הזה לא תומך בהתראות. המשימות עדיין יתעדכנו אוטומטית כשהאתר פתוח.');return}
- try{const permission=await Notification.requestPermission();$('workerNotifications').textContent=permission==='granted'?'✓ ההתראות הופעלו':'🔔 הפעלת התראות על משימות חדשות';notice(permission==='granted'?'מעולה! תקבלו התראה כשמשימה חדשה תגיע בזמן שהאתר פתוח.':'לא ניתנה הרשאה להתראות. העדכון האוטומטי באתר ממשיך לפעול.')}catch{notice('לא ניתן להפעיל התראות בדפדפן הזה.')}
+ try{
+  const permission=await Notification.requestPermission();syncWorkerNotificationButton();
+  notice(permission==='granted'?'ההרשאה נשמרת במכשיר גם כשיוצאים וחוזרים לאתר. כדי לקבל התראות כשהאתר סגור צריך להפעיל גם התראות Push.':'לא ניתנה הרשאה להתראות. העדכון האוטומטי באתר ממשיך לפעול.');
+ }catch{notice('לא ניתן להפעיל התראות בדפדפן הזה.')}
 };
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)syncWorkerNotificationButton()});
 async function init(){try{const d=await api('me');if(d.user)await enter(d.user);else await load()}catch{await load()}}
 document.querySelectorAll('[data-tab]').forEach(tab=>tab.addEventListener('click',()=>{
  const target=tab.dataset.tab;
