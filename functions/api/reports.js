@@ -1,5 +1,5 @@
 import {json,requireAuth} from "./_auth.js";
-const BRANCHES=["ביתר עילית A","ביתר עילית B","בית שמש רמה א","בית שמש רמה ד","בית שמש נעימי","צפת","תל אביב","קריית ספר","מודיעין","אשדוד ג","אשדוד ז","בני ברק","פתח תקווה","רחובות"];
+const BRANCHES=["ביתר עילית A","ביתר עילית B"];
 export async function onRequestGet({request,env}){
  try{
   const user=await requireAuth(request,env);
