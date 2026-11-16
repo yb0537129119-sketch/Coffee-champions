@@ -212,7 +212,7 @@ document.querySelectorAll('[data-tab]').forEach(tab=>tab.addEventListener('click
  if(target==='archive'){if(currentUser)loadArchive();else{$('archive').innerHTML='<div class="empty">לצפייה בקבלות יש להתחבר כמנהל סניף או כמנהל אזור דרך התפריט ☰.</div>';}}
 }));
 init();
-let refreshing=false;setInterval(async()=>{if(!$('modal').classList.contains('hidden')||refreshing)return;refreshing=true;try{await load(true);if(!$('tasksPanel').classList.contains('hidden')&&!currentUser)await loadWorkerTasks()}finally{refreshing=false}},15000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!$('tasksPanel').classList.contains('hidden')&&!currentUser)loadWorkerTasks()});
+let refreshing=false;setInterval(async()=>{if(!$('modal').classList.contains('hidden')||refreshing)return;refreshing=true;try{await load(true);if(!currentUser)await loadWorkerTasks()}finally{refreshing=false}},15000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&!currentUser)loadWorkerTasks()});
 })();
 </script></body></html>
