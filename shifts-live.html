@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f0df">
+<title>משמרות בלייב | קליית בראשית</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f0df;color:#302b20;font-family:Arial,sans-serif}
+header{background:#fffaf0;border-bottom:3px solid #a32638;padding:20px 14px;text-align:center}
+header strong{font-size:25px;color:#a32638}header div{color:#8c6a20;margin-top:7px;font-size:12px;letter-spacing:2px}
+main{width:min(1050px,100%);margin:auto;padding:15px 12px 45px}
+.tools,.day,.summary{background:#fffdf6;border:1px solid #dfd2ad;border-radius:13px;padding:14px;margin-bottom:12px;box-shadow:0 3px 12px #6b54200d}
+.tools{display:flex;gap:12px;align-items:end;flex-wrap:wrap}.field label{display:block;font-weight:bold;margin-bottom:6px}
+input,select{padding:11px;border:1px solid #cdbd91;border-radius:9px;background:white;font-size:16px;color:#302b20}
+.hint{font-size:12px;color:#74684f}.updated{margin-inline-start:auto}
+.day h2{font-size:19px;margin:0 0 12px;border-right:4px solid #a32638;padding:6px 9px;background:#f3ead2}
+.group{margin:10px 0}.group h3{font-size:15px;color:#8c2636;margin:0 0 7px}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:9px 7px;text-align:right;border:1px solid #d9c99f}th{background:#252525;color:#fff;font-size:12px}tbody tr:nth-child(even){background:#fbf7ec}
+.pill{display:inline-block;background:#f1e8cf;border-radius:20px;padding:4px 8px;font-size:12px}
+.empty{text-align:center;padding:24px;color:#74684f}
+.summary{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:#74684f;font-size:13px}
+@media(max-width:560px){header strong{font-size:21px}.day{padding:10px}table{font-size:12px}th,td{padding:8px 5px}.hide-mobile{display:none}}
+</style></head>
+<body>
+<header><strong>קליית בראשית · משמרות</strong><div>לוח משמרות שבועי · עדכון חי</div></header>
+<main>
+<div class="tools">
+<div class="field"><label for="week">בחירת שבוע</label><input id="week" type="date"></div>
+<div class="field"><label for="branch">סניף</label><select id="branch"><option value="all">כל הסניפים</option><option value="ביתר עילית A">ביתר עילית A</option><option value="ביתר עילית B">ביתר עילית B</option></select></div>
+<div class="hint updated" id="updated">טוען נתונים…</div>
+</div>
+<div class="summary"><span id="count">משמרות: —</span><span id="employees">עובדים: —</span><span>העמוד מתעדכן אוטומטית כל 15 שניות</span></div>
+<div id="list"><div class="empty">טוען סידור שבועי…</div></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const localDate=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const weekStart=v=>{const d=new Date(v+'T12:00:00');d.setDate(d.getDate()-d.getDay());return d.toISOString().slice(0,10)};
+const plus=(v,n)=>{const d=new Date(v+'T12:00:00');d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const label=v=>new Date(v+'T12:00:00').toLocaleDateString('he-IL',{weekday:'long',day:'2-digit',month:'2-digit'});
+const groups=[['משמרת בוקר',s=>s.start_time!=='14:00'&&s.start_time!=='18:00'&&s.start_time!=='07:30'],['משמרת ערב',s=>s.start_time==='14:00'],['משמרת ערב מאוחרת',s=>s.start_time==='18:00'],['משמרת שישי',s=>s.start_time==='07:30']];
+async function load(){const start=weekStart($('week').value||localDate()),branch=$('branch').value;try{const r=await fetch('/api/shifts?week_start='+encodeURIComponent(start)+'&branch='+encodeURIComponent(branch),{cache:'no-store'});const d=await r.json();if(!r.ok)throw Error(d.error||'לא ניתן לטעון משמרות');const all=d.shifts||[];$('count').textContent='משמרות: '+all.length;$('employees').textContent='עובדים: '+new Set(all.map(s=>s.employee+'|'+s.branch)).size;$('updated').textContent='עודכן: '+new Date().toLocaleTimeString('he-IL');let html='';for(let i=0;i<7;i++){const date=plus(start,i),items=all.filter(s=>s.shift_date===date);if(!items.length)continue;let body='';for(const [title,test] of groups){const rows=items.filter(test);if(!rows.length)continue;body+='<div class="group"><h3>'+title+'</h3><table><thead><tr><th>עובד</th><th>סניף</th><th>שעות</th><th class="hide-mobile">תפקיד / עמדה</th></tr></thead><tbody>'+rows.map(s=>'<tr><td><strong>'+esc(s.employee)+'</strong></td><td><span class="pill">'+esc(s.branch)+'</span></td><td>'+esc(s.start_time)+'–'+esc(s.end_time)+'</td><td class="hide-mobile">'+esc(s.role||'—')+'</td></tr>').join('')+'</tbody></table></div>'}html+='<section class="day"><h2>'+label(date)+'</h2>'+body+'</section>'}$('list').innerHTML=html||'<div class="empty">אין משמרות בשבוע שנבחר.</div>'}catch(e){$('list').innerHTML='<div class="empty">'+esc(e.message)+'</div>'}}
+$('week').value=localDate();$('week').addEventListener('change',load);$('branch').addEventListener('change',load);load();setInterval(load,15000);
+</script></body></html>
