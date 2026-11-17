@@ -242,7 +242,7 @@ async function init(){try{const d=await api('me');if(d.user)await enter(d.user);
 document.querySelectorAll('[data-tab]').forEach(tab=>tab.addEventListener('click',()=>{
  const target=tab.dataset.tab;
  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));
- $('homePanel').classList.remove('hidden');
+ $('homePanel').classList.toggle('hidden',target!=='home');
  $('reportPanel').classList.toggle('hidden',target!=='report');if(target==='report'){clear();loadReportEmployees();}
  $('archivePanel').classList.toggle('hidden',target!=='archive');
  $('tasksPanel').classList.toggle('hidden',target!=='tasks');if(target==='tasks')loadTasks();
