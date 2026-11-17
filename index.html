@@ -2,7 +2,7 @@
 <!-- competition-update-refresh-2026-11-11 -->
 <html lang="he" dir="rtl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f4edda"><meta name="robots" content="noindex,nofollow"><meta name="application-name" content="קליית בראשית"><meta name="apple-mobile-web-app-title" content="קליית בראשית">
+<meta name="theme-color" content="#f4edda"><meta name="application-name" content="קליית בראשית"><meta name="apple-mobile-web-app-title" content="קליית בראשית">
 <link rel="manifest" href="/manifest.webmanifest"><link rel="apple-touch-icon" href="/assets/coffee-champions.svg"><link rel="icon" type="image/svg+xml" href="/assets/coffee-champions.svg">
 <title>מנויים | קליית בראשית</title>
 <style>
@@ -132,8 +132,8 @@ textarea{resize:vertical}
 <section class="panel tab-panel hidden" id="reportPanel">
  <div class="branch-title">דיווח מנויים</div>
  <div class="note">כל עובד יכול לדווח מכל סניף. בוחרים סניף, בוחרים עובד מתוך רשימת העובדים שהמנהל הגדיר ומצרפים צילום קבלה. כל קבלה מוסיפה מנוי אחד לספירה.</div>
- <label for="reportBranch">בחירת סניף</label><select id="reportBranch"><option value="">בחרו סניף כדי לטעון עובדים</option><option value="ביתר עילית A">ביתר עילית A</option><option value="ביתר עילית B">ביתר עילית B</option></select>
- <label for="employee">בחירת עובד</label><select id="employee" disabled style="pointer-events:auto;position:relative;z-index:2"><option value="">קודם בחרו סניף</option></select>
+ <label for="reportBranch">בחירת סניף</label><select id="reportBranch"><option value="ביתר עילית A">ביתר עילית A</option><option value="ביתר עילית B">ביתר עילית B</option></select>
+ <label for="employee">בחירת עובד</label><select id="employee" style="pointer-events:auto;position:relative;z-index:2"><option value="">קודם בחרו סניף</option></select>
  <label for="receipt">צילום קבלה – חובה לכל מנוי חדש</label><input id="receipt" type="file" accept="image/*" required>
  <button id="save">שמירת הקבלה והוספת מנוי</button>
 </section>
@@ -331,7 +331,7 @@ document.querySelectorAll('[data-tab]').forEach(tab=>tab.addEventListener('click
  const target=tab.dataset.tab;
  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===tab));
  $('homePanel').classList.toggle('hidden',target!=='home');
- $('reportPanel').classList.toggle('hidden',target!=='report');if(target==='report'){clear();$('employee').disabled=true;$('employee').innerHTML='<option value="">קודם בחרו סניף</option>';}
+ $('reportPanel').classList.toggle('hidden',target!=='report');if(target==='report'){clear();loadReportEmployees();}
  $('archivePanel').classList.toggle('hidden',target!=='archive');
  $('tasksPanel').classList.toggle('hidden',target!=='tasks');if(target==='tasks')loadTasks();$('shiftsPanel').classList.toggle('hidden',target!=='shifts');if(target==='shifts')loadShifts();
  if(target==='archive'){if(currentUser)loadArchive();else{$('archive').innerHTML='<div class="empty">לצפייה בקבלות יש להתחבר כמנהל סניף או כמנהל אזור דרך התפריט ☰.</div>';}}
