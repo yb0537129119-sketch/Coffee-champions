@@ -79,6 +79,9 @@ main{max-width:820px;padding-top:18px}
 .branch-title{letter-spacing:-.25px}
 nav.tabs{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:8px;padding-top:9px;padding-bottom:9px}
 nav.tabs::-webkit-scrollbar{display:none}
+/* Keep all main sections visible without horizontal scrolling */
+nav.tabs{display:flex!important;flex-wrap:wrap!important;overflow:visible!important;justify-content:stretch!important}
+nav.tabs .tab{flex:1 1 calc(25% - 8px)!important;min-width:0!important;white-space:normal!important;line-height:1.2!important}
 nav.tabs .tab{flex:1 0 auto;min-width:76px;border-radius:12px!important;transition:background .18s ease,transform .18s ease}
 nav.tabs .tab:active,button:active{transform:scale(.985)}
 button{border-radius:12px;transition:filter .18s ease,transform .18s ease,box-shadow .18s ease;box-shadow:0 2px 5px #6b542014}
